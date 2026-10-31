@@ -31,4 +31,12 @@ object sonidos {
   method gameOver() {
     game.sound("sonidos/gameOver.mp3").play()
   }
+
+  method cambioBoton() {
+    game.sound("sonidos/cambioBoton.mp3").play()
+  }
+
+  method selecBoton() {
+    game.sound("sonidos/selecBoton.mp3").play()
+  }
 }

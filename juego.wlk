@@ -26,14 +26,17 @@ object juego {
         opcionSeleccionada = 1
 
         keyboard.up().onPressDo({
+            sonidos.cambioBoton()
             self.arriba()
         })
 
         keyboard.down().onPressDo({
+            sonidos.cambioBoton()
             self.abajo()
         })
 
         keyboard.enter().onPressDo({
+            sonidos.selecBoton()
             self.seleccionar()
         })
     }

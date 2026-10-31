@@ -140,11 +140,9 @@ object niveles{
 
     const nivel2 = new Nivel(ticksGeneracion = 1200, probabilidadEnemigos = 0.4, generadorEnemigos = { pos, dir => generadorEnemigos.generarColectivo(pos, dir) }, nivelActual = 2, creadorBloque = { pos => new Visual(position = pos, image = "calle.png") })
 
-    const nivel3 = new Nivel(ticksGeneracion = 2000, probabilidadEnemigos = 0.3, creadorBloque = { pos => new Visual(position = pos, image = "via.png") }, generadorEnemigos = { pos, dir => generadorEnemigos.generarAuto(pos, dir) }, nivelActual = 3)
+	const nivel3 = new Nivel(ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = { pos, dir => generadorEnemigos.generarAuto(pos, dir) }, nivelActual = 3, creadorBloque = { pos => new Visual(position = pos, image = "via.png") })
 
 	var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3]
-
-	
 
 	method empezar(){
 		nivelesCreados.get(0).empezar()
