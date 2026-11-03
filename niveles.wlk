@@ -6,6 +6,7 @@ import fondos.*
 import visuales.*
 import powerups.*
 import cinematicas.*
+import sonidos.*
 
 object generadorDeNivel {
 
@@ -125,6 +126,7 @@ class Nivel {
 	method pasarDeNivel() {
 		//jugador.puedePasarDeNivel()
 		if(jugador.estaEnFacultad()){
+			sonidos.pasarNivel()
 			jugador.reiniciarPosicion()
 			niveles.pasarNivel()
 		}

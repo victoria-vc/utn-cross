@@ -59,7 +59,7 @@ object jugador {
         game.schedule(tiempo, { tieneEscudo = false })
     }
 
-    method perdio() = vidas < 1 // sonido de game over
+    method perdio() = vidas < 1 
 
     method perderVida() {
         if (!tieneEscudo) {
