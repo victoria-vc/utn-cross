@@ -6,6 +6,7 @@ import fondos.*
 import visuales.*
 import powerups.*
 import cinematicas.*
+import mapa.*
 
 object generadorDeNivel {
 
@@ -90,14 +91,14 @@ class Nivel {
 				const lado = if (ladoRandom > 0.5) 0 else game.width()
 				const direccion = if (ladoRandom > 0.5) 1 else -1
 
-				const nuevoEnemigo = generadorEnemigos.apply(game.at(lado, calle), direccion)
+				const nuevoEnemigo = generadorEnemigos.anyOne().generarEnemigo(game.at(lado, calle), direccion)
 				enemigos.add(nuevoEnemigo)
 				nuevoEnemigo.agregarAlJuego()
 			}
 		})
 
 		game.onTick(100, "sacar_enemigos", { //saco de la visual y la lista los enemigos que estan fuera de la grilla
-			const autosAfuera = enemigos.filter({enemigo => enemigo.estaAfuera()})
+			const autosAfuera = enemigos.filter({enemigo => mapa.enemigoSalioDeGrilla(enemigo)})
 			autosAfuera.forEach({enemigo => enemigo.sacarDelJuego()})
 			enemigos.removeAll(autosAfuera)
 		})
@@ -108,6 +109,10 @@ class Nivel {
 
 		game.onTick(1000, "check_gano", {
 			self.pasarDeNivel()
+		})
+
+		game.onCollideDo(jugador, { elemento =>
+    		elemento.afectarJugador(jugador)
 		})
 
 		// Filas de pasto donde pueden aparecer Powerups
@@ -124,7 +129,7 @@ class Nivel {
 	
 	method pasarDeNivel() {
 		//jugador.puedePasarDeNivel()
-		if(jugador.estaEnFacultad()){
+		if(mapa.ganoElNivel(jugador)){
 			jugador.reiniciarPosicion()
 			niveles.pasarNivel()
 		}
@@ -136,13 +141,15 @@ object niveles{
 
 	var property nivelActual = 0
 
-	const nivel1 = new Nivel(ticksGeneracion = 1500, probabilidadEnemigos = 0.3, generadorEnemigos = { pos, dir => generadorEnemigos.generarAuto(pos, dir) }, nivelActual = 1, creadorBloque = { pos => new Visual(position = pos, image = "calle.png") })
+	const nivel1 = new Nivel(ticksGeneracion = 500, probabilidadEnemigos = 0.4, generadorEnemigos = [autoFactory], nivelActual = 1, creadorBloque = { pos => new Visual(position = pos, image = "calle.png") })
 
-    const nivel2 = new Nivel(ticksGeneracion = 1200, probabilidadEnemigos = 0.4, generadorEnemigos = { pos, dir => generadorEnemigos.generarColectivo(pos, dir) }, nivelActual = 2, creadorBloque = { pos => new Visual(position = pos, image = "calle.png") })
+    const nivel2 = new Nivel(ticksGeneracion = 200, probabilidadEnemigos = 0.5, generadorEnemigos = [colectivoFactory], nivelActual = 2, creadorBloque = { pos => new Visual(position = pos, image = "calle.png") })
 
-	const nivel3 = new Nivel(ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = { pos, dir => generadorEnemigos.generarAuto(pos, dir) }, nivelActual = 3, creadorBloque = { pos => new Visual(position = pos, image = "via.png") })
+	const nivel3 = new Nivel(ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 3, creadorBloque = { pos => new Visual(position = pos, image = "via.png") })
 
-	var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3]
+	//var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3]
+
+	var property nivelesCreados = [nivel1, nivel2, nivel3]
 
 	method empezar(){
 		nivelesCreados.get(0).empezar()

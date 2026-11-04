@@ -1,44 +1,34 @@
 import niveles.*
 import sonidos.*
 import juego.*
+import mapa.*
+import powerups.*
 
 object jugador {
     var property position = game.at(10, 0)
-    var direccion = "derecha"
+    var direccion = derecha
     var property vidas = 3 
-    var property tieneEscudo = false
+    var property escudoJugador = sinEscudo
     var property velocidad = 1
 
-    method image() {
-        var asset
-        if (direccion == "derecha")
-            asset = "derecha.png" 
-        if (direccion == "izquierda")
-            asset = "izquierda.png"
-        if (direccion == "arriba")
-            asset = "arriba.png"
-        if (direccion == "abajo")
-            asset = "abajo.png"
-        return asset
-    }
+    method image() = direccion.image()
 
     method position(nuevaPosition) {
         const temp = position
-        if ( self.estaEnGrilla(nuevaPosition)){
+        if ( mapa.estaEnGrilla(nuevaPosition)){
             if (nuevaPosition.x() > position.x())
-                direccion = "derecha"
+                direccion = derecha
 
             if (nuevaPosition.x() < position.x())
-                direccion = "izquierda"
+                direccion = izquierda
             
             if (nuevaPosition.y() > position.y())
-                direccion = "arriba"
+                direccion = arriba
 
             if (nuevaPosition.y() < position.y())
-                direccion = "abajo"
+                direccion = abajo
 
             position = nuevaPosition
-
             sonidos.moverPersonaje()
         }else{
             position = temp
@@ -49,26 +39,25 @@ object jugador {
         position = game.at(10, 0)
     }
 
-    method estaEnFacultad() = self.position().y() == game.height() - 1
-
-
-    method estaEnGrilla(pos) = pos.x() >= 0 and pos.x() <= game.width() - 1 and pos.y() >= 0 and pos.y() <= game.height() - 1
-
     method activarEscudo(tiempo){
-        tieneEscudo = true
-        game.schedule(tiempo, { tieneEscudo = false })
+        escudoJugador = escudo
+        game.schedule(tiempo, { self.sacarEscudo() })
+    }
+
+    method sacarEscudo(){
+        escudoJugador = sinEscudo
+    }
+
+    method sacarVida(){
+        vidas -= 1
     }
 
     method perdio() = vidas < 1 // sonido de game over
 
     method perderVida() {
-        if (!tieneEscudo) {
-            vidas -= 1
-            sonidos.choque()
-            self.reiniciarPosicion()
-            if (self.perdio()) {
-                juego.perder()
-            }
+        escudoJugador.perderVida(self)
+        if (self.perdio()) {
+            juego.perder()
         }
     }
 
@@ -84,6 +73,22 @@ object jugador {
     })
     }
 
-    method esJugador() = true
+
+}
+
+object derecha{
+    method image() = "jugador/jugador_derecha.png"
+}
+
+object izquierda{
+    method image() = "jugador/jugador_izquierda.png"
+
+}
+object arriba{
+    method image() = "jugador/jugador_arriba.png"
+
+}
+object abajo{
+    method image() = "jugador/jugador_abajo.png"
 
 }

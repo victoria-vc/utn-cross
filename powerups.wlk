@@ -12,15 +12,6 @@ class PowerUp {
         game.removeVisual(self)
     }
 
-    method initialize() {
-        game.onCollideDo(self, { personaje => 
-            if(personaje.esJugador()) {
-                self.afectarJugador(personaje)
-            }
-        })
-    }
-
-    method esJugador() = false
 }
 
 class Mate inherits PowerUp {
@@ -49,5 +40,20 @@ class Monster inherits PowerUp {
     override method afectarJugador(unJugador) {
         super(unJugador)
          unJugador.activarVelocidad()
+    }
+}
+
+object escudo{
+    method perderVida(unJugador){
+        unJugador.sacarEscudo()
+    }
+}
+
+object sinEscudo{
+    method perderVida(unJugador){
+        console.println("perder vida")
+        jugador.reiniciarPosicion()
+        unJugador.sacarVida()
+        sonidos.choque()
     }
 }

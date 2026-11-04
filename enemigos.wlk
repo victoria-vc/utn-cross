@@ -1,19 +1,12 @@
 import jugador.*
 import niveles.*
+import mapa.*
 
 
 class Enemigo {
     var property position
     var property direccion
     var property velocidad
-
-    method initialize() {
-        game.onCollideDo(self, { personaje => 
-            if(personaje.esJugador()) {
-                self.afectarJugador(personaje)
-            }
-        })
-    }
 
     method image()
 
@@ -34,7 +27,6 @@ class Enemigo {
 
     method estaAfuera() = self.position().x() < -5 or self.position().x() > game.width() + 5 //agrego 5 a los dos lados para que no se borren antes de aparecer
 
-    method esJugador() = false
 }
 
 
@@ -102,23 +94,25 @@ object barrera {
     }
 }
 
-object generadorEnemigos {
-
-    method generarAuto(posicion, direccion) {
+object autoFactory{
+    method generarEnemigo(posicion, direccion){
         const color = ["rojo", "azul", "gris"].anyOne()
-        return new Auto(position = posicion, velocidad = 0.1.randomUpTo(1), direccion = direccion, color = color)
+        return new Auto(position = posicion, velocidad = (0.1).randomUpTo(1), direccion = direccion, color = color)
     }
+}
 
-    method generarColectivo(posicion, direccion) {
+object colectivoFactory{
+    method generarEnemigo(posicion, direccion) {
         const lineaRandom = ["7", "114", "145"].anyOne() 
         return new Colectivo(
             position = posicion, 
-            velocidad = 0.2.randomUpTo(1.5), 
+            velocidad = (0.2).randomUpTo(1.5), 
             direccion = direccion, 
             linea = lineaRandom
         )
     }
 }
+
 
 /* method generarTren(posicion, direccion) {
         return new Tren(position = posicion, velocidad = 0.5, direccion = direccion)
