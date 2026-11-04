@@ -30,7 +30,7 @@ class Escudo inherits PowerUp {
     override method afectarJugador(unJugador) {
         super(unJugador)
         unJugador.activarEscudo(tiempoMs)
-        sonidos.agarrarItem()
+        sonidos.escudo()
     }
 }
 
@@ -40,6 +40,7 @@ class Monster inherits PowerUp {
     override method afectarJugador(unJugador) {
         super(unJugador)
          unJugador.activarVelocidad()
+         sonidos.velocidad()
     }
 }
 

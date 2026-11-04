@@ -12,7 +12,6 @@ class Enemigo {
 
     method afectarJugador(unJugador) = unJugador.perderVida()
 
-
     method mover(){
         position = position.right(direccion * velocidad)
     }
@@ -33,7 +32,6 @@ class Enemigo {
 class Auto inherits Enemigo{
     var property color
     override method image() = "enemigos/auto_" + color.toString() + ".png" 
-    
 }
 
 class ColaColectivo inherits Enemigo {

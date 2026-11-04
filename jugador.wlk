@@ -52,7 +52,7 @@ object jugador {
         vidas -= 1
     }
 
-    method perdio() = vidas < 1 // sonido de game over
+    method perdio() = vidas < 1 
 
     method perderVida() {
         escudoJugador.perderVida(self)
