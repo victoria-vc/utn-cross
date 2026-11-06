@@ -8,9 +8,9 @@ class Visual {
     method afectarJugador(unJugador){}
 }
 
-object flechaMenu inherits Visual(position = game.at(2, 5), image = "menu/flecha.png") {
-    method moverArriba() { position = game.at(2, 5) }
-    method moverAbajo() { position = game.at(2, 3) }
+object flechaMenu inherits Visual(position = game.at(3, 5), image = "menu/flecha.png") {
+    method moverArriba() { position = game.at(3, 5) }
+    method moverAbajo() { position = game.at(3, 3) }
 }
 
 object marcadorVidas {

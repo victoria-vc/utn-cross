@@ -8,7 +8,6 @@ import cinematicas.*
 
 object mapa{
 
-
     method estaEnGrilla(unaPosicion){
         return unaPosicion.x() >= 0 and unaPosicion.x() <= game.width() - 1 and unaPosicion.y() >= 0 and unaPosicion.y() <= game.height() - 1
     }

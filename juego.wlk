@@ -16,11 +16,12 @@ object juego {
 
         game.addVisual(fondoMenu)
 
-        const botonEmpezar = new Visual(position = game.at(4, 5), image = "menu/empezar.png")
-        const botonSalir = new Visual(position = game.at(4, 3), image = "menu/salir.png")
-        //const botonAyuda = new Visual(position = game.at(4, 3), image = "menu/ayuda.png")
-        //const botonSalir = new Visual(position = game.at(4, 1), image = "menu/salir.png")
+        const botonEmpezar = new Visual(position = game.at(5, 5), image = "menu/empezar.png")
+        const botonAyuda = new Visual(position = game.at(5, 3), image = "menu/comojugar.png")
+        const botonSalir = new Visual(position = game.at(5, 1), image = "menu/salir.png")
+
         game.addVisual(botonEmpezar)
+        game.addVisual(botonAyuda)
         game.addVisual(botonSalir)
         game.addVisual(flechaMenu)
 
@@ -43,19 +44,34 @@ object juego {
     }
 
     method arriba() {
-        opcionSeleccionada = 1
-        flechaMenu.moverArriba()
+        if (opcionSeleccionada > 1) {
+            opcionSeleccionada -= 1
+            flechaMenu.position(flechaMenu.position().up(2))
+        }
     }
 
     method abajo() {
-        opcionSeleccionada = 2
-        flechaMenu.moverAbajo()
+        if (opcionSeleccionada < 3) {
+            opcionSeleccionada += 1
+            flechaMenu.position(flechaMenu.position().down(2))
+        }
     }
 
     method seleccionar() {
         if (opcionSeleccionada == 1) {
             self.iniciarNivel()
+        } else if (opcionSeleccionada == 2) {
+            self.mostrarAyuda()
+        } else if (opcionSeleccionada == 3) {
+            game.stop() // cerramos el juego ?
         }
+    }
+
+    method mostrarAyuda() {
+        game.clear()
+        game.addVisual(fondoMenuDifuminado)
+        
+        // game.addVisual(CarteldeAyuda)
     }
 
     method iniciarNivel() {
