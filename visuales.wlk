@@ -6,7 +6,6 @@ class Visual {
     var property image
 
     method afectarJugador(unJugador){}
-    
 }
 
 object flechaMenu inherits Visual(position = game.at(2, 5), image = "menu/flecha.png") {

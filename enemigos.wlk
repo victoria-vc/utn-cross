@@ -62,45 +62,56 @@ class Colectivo inherits Enemigo {
         game.removeVisual(cola)
     }
 }
-class ColaTren inherits Enemigo {
+
+class ColaFerrocarril inherits Enemigo {
     override method image() = "enemigos/transparente.png" 
     override method mover() {}   
 }
 
-class Tren inherits Enemigo {
-    const cantidadVagones = 15
+class Ferrocarril inherits Enemigo {
     const cola = []
 
+    method cantidadCeldas() 
+
     method initialize() {
-        cantidadVagones.times { i =>
-            cola.add(new ColaTren(
-                position = self.posicionVagon(i), 
+        self.cantidadCeldas().times { i =>
+            cola.add(new ColaFerrocarril(
+                position = self.posicionCelda(i), 
                 direccion = direccion, 
                 velocidad = velocidad
             ))
         }
     }
 
-    override method image() = "enemigos/tren.png"
-
-    method posicionVagon(indice) = if (direccion == 1) position.left(indice) else position.right(indice)
+    method posicionCelda(indice) = if (direccion == 1) position.left(indice) else position.right(indice)
 
     override method mover() {
         super()
-        (1..cantidadVagones).forEach { i =>
-            cola.get(i - 1).position(self.posicionVagon(i))
+        (1..self.cantidadCeldas()).forEach { i =>
+            cola.get(i - 1).position(self.posicionCelda(i))
         }
     }
 
     override method agregarAlJuego() {
         game.addVisual(self)
-        cola.forEach { vagon => game.addVisual(vagon) }
+        cola.forEach { celda => game.addVisual(celda) }
     }
 
     override method sacarDelJuego() {
         game.removeVisual(self)
-        cola.forEach { vagon => game.removeVisual(vagon) }
+        cola.forEach { celda => game.removeVisual(celda) }
     }
+}
+
+
+class Tren inherits Ferrocarril {
+    override method image() = "enemigos/tren.png"
+    override method cantidadCeldas() = 15
+}
+
+class Premetro inherits Ferrocarril {
+    override method image() = "enemigos/premetro.png"
+    override method cantidadCeldas() = 3
 }
 
 class Piquete inherits Enemigo {
@@ -131,6 +142,16 @@ object trenFactory {
         return new Tren(
             position = posicion, 
             velocidad = (0.2).randomUpTo(1.5), 
+            direccion = direccion
+        )
+    }
+}
+
+object premetroFactory {
+    method generarEnemigo(posicion, direccion) {  
+        return new Premetro(
+            position = posicion, 
+            velocidad = (0.1).randomUpTo(0.6), 
             direccion = direccion
         )
     }
