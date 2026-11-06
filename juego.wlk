@@ -18,7 +18,8 @@ object juego {
 
         const botonEmpezar = new Visual(position = game.at(4, 5), image = "menu/empezar.png")
         const botonSalir = new Visual(position = game.at(4, 3), image = "menu/salir.png")
-        
+        //const botonAyuda = new Visual(position = game.at(4, 3), image = "menu/ayuda.png")
+        //const botonSalir = new Visual(position = game.at(4, 1), image = "menu/salir.png")
         game.addVisual(botonEmpezar)
         game.addVisual(botonSalir)
         game.addVisual(flechaMenu)

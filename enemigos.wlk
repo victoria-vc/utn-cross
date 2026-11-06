@@ -151,7 +151,7 @@ object premetroFactory {
     method generarEnemigo(posicion, direccion) {  
         return new Premetro(
             position = posicion, 
-            velocidad = (0.1).randomUpTo(0.6), 
+            velocidad = 0.5, 
             direccion = direccion
         )
     }
