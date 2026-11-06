@@ -146,7 +146,7 @@ object niveles{
 
 	const nivel2 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 1200, probabilidadEnemigos = 0.4, generadorEnemigos = [colectivoFactory], nivelActual = 2)
 
-	const nivel3 = new Nivel(imagenCamino = "via.png", ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 3)
+	const nivel3 = new Nivel(imagenCamino = "via.png", ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = [trenFactory], nivelActual = 3)
 
 	//var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3]
 

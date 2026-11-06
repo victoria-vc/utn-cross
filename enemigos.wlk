@@ -28,7 +28,6 @@ class Enemigo {
 
 }
 
-
 class Auto inherits Enemigo{
     var property color
     override method image() = "enemigos/auto_" + color.toString() + ".png" 
@@ -63,33 +62,49 @@ class Colectivo inherits Enemigo {
         game.removeVisual(cola)
     }
 }
+class ColaTren inherits Enemigo {
+    override method image() = "enemigos/transparente.png" 
+    override method mover() {}   
+}
 
 class Tren inherits Enemigo {
+    const cantidadVagones = 15
+    const cola = []
+
+    method initialize() {
+        cantidadVagones.times { i =>
+            cola.add(new ColaTren(
+                position = self.posicionVagon(i), 
+                direccion = direccion, 
+                velocidad = velocidad
+            ))
+        }
+    }
+
     override method image() = "enemigos/tren.png"
+
+    method posicionVagon(indice) = if (direccion == 1) position.left(indice) else position.right(indice)
+
+    override method mover() {
+        super()
+        (1..cantidadVagones).forEach { i =>
+            cola.get(i - 1).position(self.posicionVagon(i))
+        }
+    }
+
+    override method agregarAlJuego() {
+        game.addVisual(self)
+        cola.forEach { vagon => game.addVisual(vagon) }
+    }
+
+    override method sacarDelJuego() {
+        game.removeVisual(self)
+        cola.forEach { vagon => game.removeVisual(vagon) }
+    }
 }
 
 class Piquete inherits Enemigo {
     override method image() = "enemigos/piquete.png"
-}
-
-object barrera {
-    var abierta = true
-    var property position = game.at(1,1)
-
-    method esEnemigo() = false
-
-    method image(){
-        if(abierta){
-            return "abierta.png"
-        }
-        else{
-            return "cerrada.png"
-        }
-    }
-
-    method alternar(){
-        abierta = !abierta
-    }
 }
 
 object autoFactory{
@@ -111,7 +126,12 @@ object colectivoFactory{
     }
 }
 
-
-/* method generarTren(posicion, direccion) {
-        return new Tren(position = posicion, velocidad = 0.5, direccion = direccion)
-    } */
+object trenFactory {
+    method generarEnemigo(posicion, direccion) {  
+        return new Tren(
+            position = posicion, 
+            velocidad = (0.2).randomUpTo(1.5), 
+            direccion = direccion
+        )
+    }
+}
