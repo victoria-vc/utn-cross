@@ -6,6 +6,8 @@ class Visual {
     var property image
 
     method afectarJugador(unJugador){}
+
+    method esAtravesable() = false
 }
 
 object flechaMenu inherits Visual(position = game.at(3, 5), image = "menu/flecha.png") {

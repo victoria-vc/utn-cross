@@ -24,6 +24,8 @@ class Enemigo {
     }
 
     method estaAfuera() = self.position().x() < -5 or self.position().x() > game.width() + 5 // agrego 5 a los dos lados para que no se borren antes de aparecer
+
+    method esAtravesable() = true
 }
 
 class Auto inherits Enemigo {

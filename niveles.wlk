@@ -57,6 +57,10 @@ class Nivel {
 
 	const imagenCamino
 
+	// const cantidadArboles
+	// const cantidadLoQueSea
+	const cantidadConos
+	
 	method cargarVisuales(){
 		game.addVisual(jugador)
         movimientos.configControles(jugador)

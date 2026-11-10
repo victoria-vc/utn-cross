@@ -3,7 +3,10 @@ import niveles.*
 
 class Fondo {
     var property position = game.at(0, 0)
+
     method image() 
+
+    method esAtravesable() = true
 }
 
 object fondoMenu inherits Fondo {
