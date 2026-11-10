@@ -2,7 +2,6 @@ import jugador.*
 import niveles.*
 import mapa.*
 
-
 class Enemigo {
     var property position
     var property direccion
@@ -24,11 +23,10 @@ class Enemigo {
         game.removeVisual(self)
     }
 
-    method estaAfuera() = self.position().x() < -5 or self.position().x() > game.width() + 5 //agrego 5 a los dos lados para que no se borren antes de aparecer
-
+    method estaAfuera() = self.position().x() < -5 or self.position().x() > game.width() + 5 // agrego 5 a los dos lados para que no se borren antes de aparecer
 }
 
-class Auto inherits Enemigo{
+class Auto inherits Enemigo {
     var property color
     override method image() = "enemigos/auto_" + color.toString() + ".png" 
 }
@@ -45,7 +43,7 @@ class Colectivo inherits Enemigo {
     const cola = new ColaColectivo(colectivo = self, position = self.posicionCola(), direccion = direccion, velocidad = velocidad)
 
     override method image() = "enemigos/colectivo_" + linea.toString() + "_" + (if (direccion == 1) "derecha" else "izquierda") + ".png"
-    method posicionCola() = if (direccion == 1) position.right(1) else position.left(1)
+    method posicionCola() = if (direccion == 1) position.left(1) else position.right(1) 
 
     override method mover() {
         super()
@@ -63,19 +61,20 @@ class Colectivo inherits Enemigo {
     }
 }
 
-class ColaFerrocarril inherits Enemigo {
+
+class ColaEnemigoLargo inherits Enemigo {
     override method image() = "enemigos/transparente.png" 
     override method mover() {}   
 }
 
-class Ferrocarril inherits Enemigo {
+class EnemigoLargo inherits Enemigo {
     const cola = []
 
-    method cantidadCeldas() 
+    method cantidadCeldas() // Método abstracto, lo define cada subclase
 
     method initialize() {
         self.cantidadCeldas().times { i =>
-            cola.add(new ColaFerrocarril(
+            cola.add(new ColaEnemigoLargo(
                 position = self.posicionCelda(i), 
                 direccion = direccion, 
                 velocidad = velocidad
@@ -103,29 +102,30 @@ class Ferrocarril inherits Enemigo {
     }
 }
 
-
-class Tren inherits Ferrocarril {
+class Tren inherits EnemigoLargo {
     override method image() = "enemigos/tren.png"
     override method cantidadCeldas() = 15
 }
 
-class Premetro inherits Ferrocarril {
+class Premetro inherits EnemigoLargo {
     override method image() = "enemigos/premetro.png"
     override method cantidadCeldas() = 3
 }
 
-class Piquete inherits Enemigo {
-    override method image() = "enemigos/piquete.png"
+class Manifestacion inherits EnemigoLargo {
+    override method image() = "enemigos/manifestacion-" + (if (direccion == 1) "der" else "izq") + ".png"
+    override method cantidadCeldas() = 3 
 }
 
-object autoFactory{
+
+object autoFactory {
     method generarEnemigo(posicion, direccion){
         const color = ["rojo", "azul", "gris"].anyOne()
         return new Auto(position = posicion, velocidad = (0.1).randomUpTo(1), direccion = direccion, color = color)
     }
 }
 
-object colectivoFactory{
+object colectivoFactory {
     method generarEnemigo(posicion, direccion) {
         const lineaRandom = ["7", "114", "145"].anyOne() 
         return new Colectivo(
@@ -152,6 +152,16 @@ object premetroFactory {
         return new Premetro(
             position = posicion, 
             velocidad = 0.5, 
+            direccion = direccion
+        )
+    }
+}
+
+object manifestacionFactory {
+    method generarEnemigo(posicion, direccion) {  
+        return new Manifestacion(
+            position = posicion, 
+            velocidad = (0.1).randomUpTo(0.5), 
             direccion = direccion
         )
     }
