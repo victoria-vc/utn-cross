@@ -120,7 +120,7 @@ class Manifestacion inherits EnemigoLargo {
 
 object autoFactory {
     method generarEnemigo(posicion, direccion){
-        const color = ["rojo", "azul", "gris"].anyOne()
+        const color = ["rojo", "azul", "gris", "taxi"].anyOne()
         return new Auto(position = posicion, velocidad = (0.1).randomUpTo(1), direccion = direccion, color = color)
     }
 }
