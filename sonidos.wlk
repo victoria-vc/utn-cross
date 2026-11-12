@@ -3,7 +3,7 @@ import wollok.game.*
 
 object sonidos {
   
-  var musicaMenu = null
+  /* var musicaMenu = null
 
   method musicaIntro() {
     if (musicaMenu == null) {
@@ -19,7 +19,7 @@ object sonidos {
     if (musicaMenu != null) {
         musicaMenu.stop()
     }
-  }
+  } */
 
   method moverPersonaje() {
     const audio = game.sound("sonidos/movimiento.mp3")

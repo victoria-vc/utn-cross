@@ -17,10 +17,6 @@ object fondoMenuDifuminado inherits Fondo {
     override method image() = "menu/fondoMenuDifuminado.png"
 }
 
-object fondoGris inherits Fondo {
-    override method image() = "menu/fondogris.png"
-}
-
 object fondoPasto inherits Fondo {
     override method image() = "pasto.png"
 }
