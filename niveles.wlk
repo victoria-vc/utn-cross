@@ -62,7 +62,7 @@ class Nivel {
         movimientos.configControles(jugador)
 		(0 .. jugador.vidas()).forEach({ i => game.addVisual(new Corazon(indice = i, position = game.at(i, 13))) })
 		game.addVisual(new NivelCartel(position = game.at(0, 0), nivel = nivelActual))
-		game.addVisual(new Visual(position = game.at(19, 13), image = "flechaRoja.png"))
+		// game.addVisual(new Visual(position = game.at(19, 13), image = "flechaRoja.png"))
 	}
 
 	method empezar() {
