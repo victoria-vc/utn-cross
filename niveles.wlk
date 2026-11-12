@@ -56,13 +56,13 @@ class Nivel {
 	const property probabilidadEnemigos
 
 	const imagenCamino
-	
+
 	method cargarVisuales(){
 		game.addVisual(jugador)
         movimientos.configControles(jugador)
 		(0 .. jugador.vidas()).forEach({ i => game.addVisual(new Corazon(indice = i, position = game.at(i, 13))) })
 		game.addVisual(new NivelCartel(position = game.at(0, 0), nivel = nivelActual))
-		// game.addVisual(new Visual(position = game.at(19, 13), image = "flechaRoja.png"))
+		game.addVisual(new Visual(position = game.at(19, 13), image = "flechaRoja.png"))
 	}
 
 	method empezar() {
@@ -148,7 +148,7 @@ object niveles{
 
 	const nivel3 = new Nivel(imagenCamino = "via.png", ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
 
-	const nivel4 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = [autoFactory], nivelActual = 4)
+	const nivel4 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = [manifestacionFactory, autoFactory], nivelActual = 4)
 
 	//var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3]
 

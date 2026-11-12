@@ -12,8 +12,6 @@ class PowerUp {
         game.removeVisual(self)
     }
 
-    method esAtravesable() = true
-
 }
 
 class Mate inherits PowerUp {

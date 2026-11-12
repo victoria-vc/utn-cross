@@ -24,8 +24,6 @@ class Enemigo {
     }
 
     method estaAfuera() = self.position().x() < -5 or self.position().x() > game.width() + 5 // agrego 5 a los dos lados para que no se borren antes de aparecer
-
-    method esAtravesable() = true
 }
 
 class Auto inherits Enemigo {
@@ -114,6 +112,12 @@ class Premetro inherits EnemigoLargo {
     override method cantidadCeldas() = 3
 }
 
+class Manifestacion inherits EnemigoLargo {
+    override method image() = "enemigos/manifestacion-" + (if (direccion == 1) "der" else "izq") + ".png"
+    override method cantidadCeldas() = 3 
+}
+
+
 object autoFactory {
     method generarEnemigo(posicion, direccion){
         const color = ["rojo", "azul", "gris", "taxi"].anyOne()
@@ -148,6 +152,16 @@ object premetroFactory {
         return new Premetro(
             position = posicion, 
             velocidad = 0.5, 
+            direccion = direccion
+        )
+    }
+}
+
+object manifestacionFactory {
+    method generarEnemigo(posicion, direccion) {  
+        return new Manifestacion(
+            position = posicion, 
+            velocidad = (0.1).randomUpTo(0.5), 
             direccion = direccion
         )
     }

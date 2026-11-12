@@ -3,24 +3,6 @@ import wollok.game.*
 
 object sonidos {
   
-  var musicaMenu = null
-
-  method musicaIntro() {
-    if (musicaMenu == null) {
-        musicaMenu = game.sound("sonidos/musicaIntro.mp3")
-        musicaMenu.volume(0.5)
-        musicaMenu.shouldLoop(true)
-    }
-    
-    game.schedule(100, { musicaMenu.play() })
-  }
-
-  method pararMusicaIntro() {
-    if (musicaMenu != null) {
-        musicaMenu.stop()
-    }
-  } 
-
   method moverPersonaje() {
     const audio = game.sound("sonidos/movimiento.mp3")
     audio.volume(0.1)

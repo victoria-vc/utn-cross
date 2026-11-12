@@ -13,15 +13,9 @@ object jugador {
 
     method image() = direccion.image()
 
-    method puedePisar(unaPosicion) {
-        const objetosEnCelda = game.getObjectsIn(unaPosicion)
-        return objetosEnCelda.all({ obj => obj.esAtravesable() })
-    }
-
     method position(nuevaPosition) {
         const temp = position
-        
-        if (mapa.estaEnGrilla(nuevaPosition) and self.puedePisar(nuevaPosition)){
+        if ( mapa.estaEnGrilla(nuevaPosition)){
             if (nuevaPosition.x() > position.x())
                 direccion = derecha
 
@@ -36,8 +30,7 @@ object jugador {
 
             position = nuevaPosition
             sonidos.moverPersonaje()
-        } else {
-            // Si está fuera de la grilla o si hay un obstáculo, no se mueve
+        }else{
             position = temp
         }
     }
@@ -74,11 +67,13 @@ object jugador {
     }
 
     method activarVelocidad() {
-        velocidad = 2
-        game.schedule(2000, { // le bajé el tiempo porque se bugea ??
-            velocidad = 1
-        })
+    velocidad = 2
+    game.schedule(5000, {
+        velocidad = 1
+    })
     }
+
+
 }
 
 object derecha{

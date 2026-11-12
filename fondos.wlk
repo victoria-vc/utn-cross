@@ -3,10 +3,7 @@ import niveles.*
 
 class Fondo {
     var property position = game.at(0, 0)
-
     method image() 
-
-    method esAtravesable() = true
 }
 
 object fondoMenu inherits Fondo {
@@ -15,6 +12,10 @@ object fondoMenu inherits Fondo {
 
 object fondoMenuDifuminado inherits Fondo {
     override method image() = "menu/fondoMenuDifuminado.png"
+}
+
+object fondoGris inherits Fondo {
+    override method image() = "menu/fondogris.png"
 }
 
 object fondoPasto inherits Fondo {
