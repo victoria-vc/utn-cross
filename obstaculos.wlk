@@ -1,4 +1,4 @@
-import jugador.*
+/* import jugador.*
 import niveles.*
 import sonidos.*
 
@@ -18,4 +18,4 @@ class Obstaculo {
 
 class Cono inherits Obstaculo {
     override method image() = "obstaculos/cono.png"
-}
+} */
