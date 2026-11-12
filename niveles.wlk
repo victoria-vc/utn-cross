@@ -56,10 +56,6 @@ class Nivel {
 	const property probabilidadEnemigos
 
 	const imagenCamino
-
-	// const cantidadArboles
-	// const cantidadLoQueSea
-	const cantidadConos
 	
 	method cargarVisuales(){
 		game.addVisual(jugador)
