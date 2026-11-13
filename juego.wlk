@@ -73,6 +73,7 @@ object juego {
         game.clear()
         game.addVisual(fondoMenuDifuminado)
         
+        
         // game.addVisual(CarteldeAyuda)
     }
 
