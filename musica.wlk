@@ -23,7 +23,12 @@ object musica {
     var volumenActual = 0.7 
     var cancionSonando = null 
 
+    var idReproduccion = 0 
+
     method iniciarPlaylistAleatoria() {
+        idReproduccion += 1 
+        const idActual = idReproduccion 
+        
         const ultimaCancion = cancionSonando
         
         const opciones = playlist.filter({ cancion => cancion != ultimaCancion })
@@ -32,11 +37,12 @@ object musica {
         cancionSonando.volume(self.volumenCheck())
         cancionSonando.play()
         
-        game.schedule(cancionSonando.duracion(), {
-            self.iniciarPlaylistAleatoria() 
+        game.schedule(cancionSonando.duracion() + 2000, {
+            if (idReproduccion == idActual) {
+                self.iniciarPlaylistAleatoria() 
+            }
         })
     }
-
     method volumenCheck() = if (estaMuteado) 0.0 else volumenActual
 
     method aplicarVolumen() {

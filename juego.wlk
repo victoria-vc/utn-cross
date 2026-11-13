@@ -10,16 +10,12 @@ object juego {
 
     method iniciar() {
         musica.iniciarPlaylistAleatoria()
-
-        keyboard.m().onPressDo({ // M
-            musica.alternarMute()
-        })
-
         menuPrincipal.mostrar()
     }
 
     method iniciarNivel() {
         game.clear()
+        self.cargarCosasGlobales()
         musica.saltarCancion()
         musica.bajarVolumenParaNivel()
         niveles.empezar()
@@ -33,7 +29,13 @@ object juego {
     }
 
     method cargarCosasGlobales() {
-        game.addVisual(iconoMusica)
+        if (!game.hasVisual(iconoMusica)) {
+            game.addVisual(iconoMusica)
+        }
+        
+        keyboard.m().onPressDo({ 
+            musica.alternarMute()
+        })
     }
 }
 
@@ -42,11 +44,12 @@ object menuPrincipal {
     var opcionSeleccionada = 1
 
     method mostrar() {
-        game.addVisual(fondoMenu)
-        juego.cargarCosasGlobales()
+        game.addVisual(fondoMenu) 
+        juego.cargarCosasGlobales() 
+        self.mostrarBotones() 
 
-        self.mostrarBotones()
-        self.posicionarFlecha()
+        self.posicionarFlecha() 
+        game.addVisual(flechaMenu)
 
         self.configurarControles()
     }
@@ -70,7 +73,6 @@ object menuPrincipal {
 
     method posicionarFlecha() {
         flechaMenu.position(game.at(3, 7 - (opcionSeleccionada * 2)))
-        game.addVisual(flechaMenu)
     }
 
     method configurarControles() {
@@ -108,6 +110,7 @@ object menuPrincipal {
         if (opcionSeleccionada == 1) {
             juego.iniciarNivel()
         } else if (opcionSeleccionada == 2) {
+            game.clear() 
             pantallaAyuda.mostrar()
         } else if (opcionSeleccionada == 3) {
             game.stop()
@@ -116,7 +119,6 @@ object menuPrincipal {
 
     method reiniciarSeleccion() {
         opcionSeleccionada = 1
-        self.posicionarFlecha()
     }
 }
 
@@ -127,16 +129,17 @@ object pantallaAyuda {
 
     method mostrar() {
         indiceSlide = 0
+        juego.cargarCosasGlobales() 
         self.mostrarSlideActual()
-
         self.configurarControles()
     }
 
     method mostrarSlideActual() {
         game.addVisual(slides.get(indiceSlide))
 
-        // Mantiene el icono de música por encima del fondo
-        game.removeVisual(iconoMusica)
+        if (game.hasVisual(iconoMusica)) {
+            game.removeVisual(iconoMusica)
+        }
         game.addVisual(iconoMusica)
     }
 
@@ -173,8 +176,7 @@ object pantallaAyuda {
     }
 
     method ocultar() {
-        game.removeVisual(slides.get(indiceSlide))
-        menuPrincipal.reiniciarSeleccion()
+        game.clear() 
         menuPrincipal.mostrar()
     }
 }
