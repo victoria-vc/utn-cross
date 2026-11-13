@@ -2,20 +2,23 @@ import niveles.*
 import fondos.*
 import visuales.*
 import sonidos.*
-
+import wollok.game.*
 
 object juego {
 
     var opcionSeleccionada = 1
+    var mostrandoAyuda = false
+    
+    const slidesAyuda = [fondoMenuDifuminado1, fondoMenuDifuminado2]
+    var indiceSlide = 0 
 
     method iniciar() {
         self.mostrarMenu()
     }
 
     method mostrarMenu() {
-
-        game.addVisual(fondoMenu)
-
+        
+        game.addVisual(fondoMenu) 
         sonidos.musicaIntro()
 
         const botonEmpezar = new Visual(position = game.at(5, 5), image = "menu/empezar.png")
@@ -25,23 +28,53 @@ object juego {
         game.addVisual(botonEmpezar)
         game.addVisual(botonAyuda)
         game.addVisual(botonSalir)
+        
+        flechaMenu.position(game.at(3, 5))
         game.addVisual(flechaMenu)
 
         opcionSeleccionada = 1
+        mostrandoAyuda = false
 
         keyboard.up().onPressDo({
-            sonidos.cambioBoton()
-            self.arriba()
+            if (!mostrandoAyuda) {
+                sonidos.cambioBoton()
+                self.arriba()
+            }
         })
 
         keyboard.down().onPressDo({
-            sonidos.cambioBoton()
-            self.abajo()
+            if (!mostrandoAyuda) {
+                sonidos.cambioBoton()
+                self.abajo()
+            }
         })
 
         keyboard.enter().onPressDo({
-            sonidos.selecBoton()
-            self.seleccionar()
+            if (!mostrandoAyuda) {
+                sonidos.selecBoton()
+                self.seleccionar()
+            }
+        })
+        
+        keyboard.right().onPressDo({
+            if (mostrandoAyuda) {
+                sonidos.cambioBoton()
+                self.siguienteSlide()
+            }
+        })
+
+        keyboard.left().onPressDo({
+            if (mostrandoAyuda) {
+                sonidos.cambioBoton()
+                self.anteriorSlide()
+            }
+        })
+
+        keyboard.control().onPressDo({
+            if (mostrandoAyuda) {
+                sonidos.selecBoton()
+                self.ocultarAyuda()
+            }
         })
     }
 
@@ -65,17 +98,37 @@ object juego {
         } else if (opcionSeleccionada == 2) {
             self.mostrarAyuda()
         } else if (opcionSeleccionada == 3) {
-            game.stop() // cerramos el juego ?
+            game.stop() 
         }
     }
 
     method mostrarAyuda() {
-        game.clear()
-        game.addVisual(fondoMenuDifuminado)
-        
-        
-        // game.addVisual(CarteldeAyuda)
+        mostrandoAyuda = true
+        indiceSlide = 0 
+        game.addVisual(slidesAyuda.get(indiceSlide)) 
     }
+
+    method siguienteSlide() {
+        if (indiceSlide < slidesAyuda.size() - 1) {
+            game.removeVisual(slidesAyuda.get(indiceSlide)) 
+            indiceSlide += 1                                
+            game.addVisual(slidesAyuda.get(indiceSlide))    
+        }
+    }
+
+    method anteriorSlide() {
+        if (indiceSlide > 0) {
+            game.removeVisual(slidesAyuda.get(indiceSlide))
+            indiceSlide -= 1
+            game.addVisual(slidesAyuda.get(indiceSlide))
+        }
+    }
+
+    method ocultarAyuda() {
+        game.removeVisual(slidesAyuda.get(indiceSlide)) 
+        mostrandoAyuda = false
+    }
+
 
     method iniciarNivel() {
         game.clear()
@@ -88,7 +141,4 @@ object juego {
         game.addVisual(cartelPerdiste)
         sonidos.gameOver()
     }
- }  
-
-
-
+}
