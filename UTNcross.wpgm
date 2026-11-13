@@ -1,5 +1,5 @@
 import wollok.game.*
-import wollok.lib.*
+// import wollok.lib.*
 import juego.*
 
 
