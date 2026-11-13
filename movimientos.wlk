@@ -2,7 +2,6 @@ import jugador.*
 import enemigos.*
 
 
-
 object movimientos {
     method configControles(jugador) {
         keyboard.up().onPressDo({jugador.position(jugador.position().up(jugador.velocidad()))})

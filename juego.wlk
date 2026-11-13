@@ -1,144 +1,180 @@
+
 import niveles.*
 import fondos.*
 import visuales.*
 import sonidos.*
-import wollok.game.*
+import musica.*
+
 
 object juego {
 
-    var opcionSeleccionada = 1
-    var mostrandoAyuda = false
-    
-    const slidesAyuda = [fondoAyuda1, fondoAyuda2, fondoAyuda3]
-    var indiceSlide = 0 
-
     method iniciar() {
-        self.mostrarMenu()
+        musica.iniciarPlaylistAleatoria()
+
+        keyboard.m().onPressDo({ // M
+            musica.alternarMute()
+        })
+
+        menuPrincipal.mostrar()
     }
 
-    method mostrarMenu() {
-        
-        game.addVisual(fondoMenu) 
-        sonidos.musicaIntro()
+    method iniciarNivel() {
+        game.clear()
+        musica.saltarCancion()
+        musica.bajarVolumenParaNivel()
+        niveles.empezar()
+    }
 
-        const botonEmpezar = new Visual(position = game.at(5, 5), image = "menu/empezar.png")
-        const botonAyuda = new Visual(position = game.at(5, 3), image = "menu/comojugar.png")
-        const botonSalir = new Visual(position = game.at(5, 1), image = "menu/salir.png")
+    method perder() {
+        game.clear()
+        self.cargarCosasGlobales()
+        game.addVisual(cartelPerdiste)
+        sonidos.gameOver()
+    }
 
-        game.addVisual(botonEmpezar)
-        game.addVisual(botonAyuda)
-        game.addVisual(botonSalir)
-        
-        flechaMenu.position(game.at(3, 5))
+    method cargarCosasGlobales() {
+        game.addVisual(iconoMusica)
+    }
+}
+
+object menuPrincipal {
+
+    var opcionSeleccionada = 1
+
+    method mostrar() {
+        game.addVisual(fondoMenu)
+        juego.cargarCosasGlobales()
+
+        self.mostrarBotones()
+        self.posicionarFlecha()
+
+        self.configurarControles()
+    }
+
+    method mostrarBotones() {
+        game.addVisual(new Visual(
+            position = game.at(5, 5),
+            image = "menu/empezar.png"
+        ))
+
+        game.addVisual(new Visual(
+            position = game.at(5, 3),
+            image = "menu/comojugar.png"
+        ))
+
+        game.addVisual(new Visual(
+            position = game.at(5, 1),
+            image = "menu/salir.png"
+        ))
+    }
+
+    method posicionarFlecha() {
+        flechaMenu.position(game.at(3, 7 - (opcionSeleccionada * 2)))
         game.addVisual(flechaMenu)
+    }
 
-        opcionSeleccionada = 1
-        mostrandoAyuda = false
-
+    method configurarControles() {
         keyboard.up().onPressDo({
-            if (!mostrandoAyuda) {
-                sonidos.cambioBoton()
-                self.arriba()
-            }
+            sonidos.cambioBoton()
+            self.arriba()
         })
 
         keyboard.down().onPressDo({
-            if (!mostrandoAyuda) {
-                sonidos.cambioBoton()
-                self.abajo()
-            }
+            sonidos.cambioBoton()
+            self.abajo()
         })
 
         keyboard.enter().onPressDo({
-            if (!mostrandoAyuda) {
-                sonidos.selecBoton()
-                self.seleccionar()
-            }
-        })
-        
-        keyboard.right().onPressDo({
-            if (mostrandoAyuda) {
-                sonidos.cambioBoton()
-                self.siguienteSlide()
-            }
-        })
-
-        keyboard.left().onPressDo({
-            if (mostrandoAyuda) {
-                sonidos.cambioBoton()
-                self.anteriorSlide()
-            }
-        })
-
-        keyboard.control().onPressDo({
-            if (mostrandoAyuda) {
-                sonidos.selecBoton()
-                self.ocultarAyuda()
-            }
+            sonidos.selecBoton()
+            self.seleccionar()
         })
     }
 
     method arriba() {
         if (opcionSeleccionada > 1) {
             opcionSeleccionada -= 1
-            flechaMenu.position(flechaMenu.position().up(2))
+            self.posicionarFlecha()
         }
     }
 
     method abajo() {
         if (opcionSeleccionada < 3) {
             opcionSeleccionada += 1
-            flechaMenu.position(flechaMenu.position().down(2))
+            self.posicionarFlecha()
         }
     }
 
     method seleccionar() {
         if (opcionSeleccionada == 1) {
-            self.iniciarNivel()
+            juego.iniciarNivel()
         } else if (opcionSeleccionada == 2) {
-            self.mostrarAyuda()
+            pantallaAyuda.mostrar()
         } else if (opcionSeleccionada == 3) {
-            game.stop() 
+            game.stop()
         }
     }
 
-    method mostrarAyuda() {
-        mostrandoAyuda = true
-        indiceSlide = 0 
-        game.addVisual(slidesAyuda.get(indiceSlide)) 
+    method reiniciarSeleccion() {
+        opcionSeleccionada = 1
+        self.posicionarFlecha()
+    }
+}
+
+object pantallaAyuda {
+
+    const slides = [fondoAyuda1, fondoAyuda2, fondoAyuda3]
+    var indiceSlide = 0
+
+    method mostrar() {
+        indiceSlide = 0
+        self.mostrarSlideActual()
+
+        self.configurarControles()
+    }
+
+    method mostrarSlideActual() {
+        game.addVisual(slides.get(indiceSlide))
+
+        // Mantiene el icono de música por encima del fondo
+        game.removeVisual(iconoMusica)
+        game.addVisual(iconoMusica)
+    }
+
+    method configurarControles() {
+        keyboard.right().onPressDo({ // ->
+            self.siguienteSlide()
+        })
+
+        keyboard.left().onPressDo({ // <-
+            self.anteriorSlide()
+        })
+
+        keyboard.control().onPressDo({ // Ctrl
+            self.ocultar()
+        })
     }
 
     method siguienteSlide() {
-        if (indiceSlide < slidesAyuda.size() - 1) {
-            game.removeVisual(slidesAyuda.get(indiceSlide)) 
-            indiceSlide += 1                                
-            game.addVisual(slidesAyuda.get(indiceSlide))    
+        if (indiceSlide < slides.size() - 1) {
+            sonidos.cambioBoton()
+            game.removeVisual(slides.get(indiceSlide))
+            indiceSlide += 1
+            self.mostrarSlideActual()
         }
     }
 
     method anteriorSlide() {
         if (indiceSlide > 0) {
-            game.removeVisual(slidesAyuda.get(indiceSlide))
+            sonidos.cambioBoton()
+            game.removeVisual(slides.get(indiceSlide))
             indiceSlide -= 1
-            game.addVisual(slidesAyuda.get(indiceSlide))
+            self.mostrarSlideActual()
         }
     }
 
-    method ocultarAyuda() {
-        game.removeVisual(slidesAyuda.get(indiceSlide)) 
-        mostrandoAyuda = false
-    }
-
-
-    method iniciarNivel() {
-        game.clear()
-        sonidos.pararMusicaIntro()
-        niveles.empezar()
-    }
-
-    method perder() {
-        game.clear()
-        game.addVisual(cartelPerdiste)
-        sonidos.gameOver()
+    method ocultar() {
+        game.removeVisual(slides.get(indiceSlide))
+        menuPrincipal.reiniciarSeleccion()
+        menuPrincipal.mostrar()
     }
 }

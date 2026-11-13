@@ -1,4 +1,4 @@
-//import juego.*
+import juego.*
 import jugador.*
 import enemigos.*
 import movimientos.*
@@ -8,6 +8,8 @@ import powerups.*
 import cinematicas.*
 import mapa.*
 import sonidos.*
+import musica.*
+
 
 object generadorDeNivel {
 
@@ -63,6 +65,13 @@ class Nivel {
 		(0 .. jugador.vidas()).forEach({ i => game.addVisual(new Corazon(indice = i, position = game.at(i, 13))) })
 		game.addVisual(new NivelCartel(position = game.at(0, 0), nivel = nivelActual))
 		game.addVisual(new Visual(position = game.at(19, 13), image = "flechaRoja.png"))
+		game.addVisual(iconoMusica)
+        musica.bajarVolumenParaNivel()
+        
+        // Reactivamos la M porque el game.clear() del nivel lo borra
+        keyboard.m().onPressDo({ 
+            musica.alternarMute() 
+        })
 	}
 
 	method empezar() {
@@ -143,16 +152,11 @@ object niveles{
 	var property nivelActual = 0
 
 	const nivel1 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 1500, probabilidadEnemigos = 0.3, generadorEnemigos = [autoFactory], nivelActual = 1)
-
 	const nivel2 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 1200, probabilidadEnemigos = 0.4, generadorEnemigos = [colectivoFactory], nivelActual = 2)
-
 	const nivel3 = new Nivel(imagenCamino = "via.png", ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
-
 	const nivel4 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 2000, probabilidadEnemigos = 0.3, generadorEnemigos = [manifestacionFactory, autoFactory], nivelActual = 4)
 
-	//var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3]
-
-	var property nivelesCreados = [nivel1, nivel2, nivel3, nivel4]
+	var property nivelesCreados = [/*cinematicaInicio, */nivel1, nivel2, nivel3, nivel4]
 
 	method empezar(){
 		nivelesCreados.get(0).empezar()

@@ -1,11 +1,26 @@
 import jugador.*
 import niveles.*
+import musica.*
 
 class Visual {
     var property position
     var property image
 
     method afectarJugador(unJugador){}
+}
+
+object iconoMusica {
+    var property position = game.at(19, 0) 
+
+    method z() = 99 // para que este encima de TODO
+
+    method image() {
+        if (musica.estaMuteado()) {
+            return "musicaOFF.png" 
+        } else {
+            return "musicaON.png"  
+        }
+    }
 }
 
 object flechaMenu inherits Visual(position = game.at(3, 5), image = "menu/flecha.png") {
