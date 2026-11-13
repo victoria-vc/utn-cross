@@ -16,6 +16,8 @@ object juego {
 
         game.addVisual(fondoMenu)
 
+        sonidos.musicaIntro()
+
         const botonEmpezar = new Visual(position = game.at(5, 5), image = "menu/empezar.png")
         const botonAyuda = new Visual(position = game.at(5, 3), image = "menu/comojugar.png")
         const botonSalir = new Visual(position = game.at(5, 1), image = "menu/salir.png")
@@ -76,6 +78,7 @@ object juego {
 
     method iniciarNivel() {
         game.clear()
+        sonidos.pararMusicaIntro()
         niveles.empezar()
     }
 
