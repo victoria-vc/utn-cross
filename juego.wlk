@@ -9,7 +9,7 @@ object juego {
     var opcionSeleccionada = 1
     var mostrandoAyuda = false
     
-    const slidesAyuda = [fondoMenuDifuminado1, fondoMenuDifuminado2]
+    const slidesAyuda = [fondoAyuda1, fondoAyuda2, fondoAyuda3]
     var indiceSlide = 0 
 
     method iniciar() {
