@@ -1,4 +1,4 @@
-import wollok.game.*
+/* import wollok.game.*
 import jugador.*
 import movimientos.*
 import casa.*
@@ -15,4 +15,4 @@ program probarCasa {
     movimientos.configControles(jugador)
 
     game.start()
-}
+} */
