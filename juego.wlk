@@ -87,7 +87,7 @@ object juego {
         game.addVisual(cartelPerdiste)
         sonidos.gameOver()
     }
-    
-}
+ }  
+
 
 
