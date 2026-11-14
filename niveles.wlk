@@ -68,10 +68,7 @@ class Nivel {
 		game.addVisual(iconoMusica)
         musica.bajarVolumenParaNivel()
         
-        // Reactivamos la M porque el game.clear() del nivel lo borra
-        keyboard.m().onPressDo({ 
-            musica.alternarMute() 
-        })
+        juego.cargarCosasGlobales()
 	}
 
 	method empezar() {

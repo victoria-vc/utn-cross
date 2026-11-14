@@ -15,7 +15,6 @@ object juego {
 
     method iniciarNivel() {
         game.clear()
-        self.cargarCosasGlobales()
         musica.saltarCancion()
         musica.bajarVolumenParaNivel()
         niveles.empezar()
@@ -23,8 +22,8 @@ object juego {
 
     method perder() {
         game.clear()
-        self.cargarCosasGlobales()
         game.addVisual(cartelPerdiste)
+        self.cargarCosasGlobales()
         sonidos.gameOver()
     }
 
