@@ -4,6 +4,7 @@ import fondos.*
 import visuales.*
 import sonidos.*
 import musica.*
+import jugador.*
 
 
 object juego {
@@ -23,8 +24,19 @@ object juego {
     method perder() {
         game.clear()
         game.addVisual(cartelPerdiste)
+        game.addVisual(cartelVolverMenu)
         self.cargarCosasGlobales()
+        keyboard.enter().onPressDo({ self.volverAlMenu() })
         sonidos.gameOver()
+    }
+
+    method volverAlMenu() {
+        jugador.reiniciar()
+        niveles.reiniciar()
+        game.clear()
+        musica.subirVolumenParaMenu()
+        menuPrincipal.reiniciarSeleccion()
+        menuPrincipal.mostrar()
     }
 
     method cargarCosasGlobales() {

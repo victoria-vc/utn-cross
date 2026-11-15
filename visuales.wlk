@@ -52,3 +52,7 @@ class Corazon {
     method image() = if (jugador.vidas() > indice) "corazon.png" else "transparente.png"
 }
 
+object cartelVolverMenu inherits Visual(position = game.at(5, 5), image = "transparente.png") {
+    method text() = "ENTER: volver al menú"
+    method textColor() = "FFFFFF"
+}

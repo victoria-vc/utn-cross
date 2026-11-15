@@ -72,7 +72,10 @@ class Nivel {
 	}
 
 	method empezar() {
-
+		filasPasto.clear()
+		filasCalle.clear()
+		enemigos.clear()
+		
 		const filas = generadorDeNivel.generarFilas();
 
 		(0 .. filas.size() - 1).forEach({ y =>
@@ -168,6 +171,10 @@ object niveles{
 		}else{
 			console.println("Ganaste")
 		}
+	}
+	
+	method reiniciar() {
+		nivelActual = 0
 	}
 
 }

@@ -39,6 +39,13 @@ object jugador {
         position = game.at(10, 0)
     }
 
+    method reiniciar() {
+        vidas = 3
+        escudoJugador = sinEscudo
+        velocidad = 1
+        self.reiniciarPosicion()
+    }
+
     method activarEscudo(tiempo){
         escudoJugador = escudo
         game.schedule(tiempo, { self.sacarEscudo() })
