@@ -1,0 +1,294 @@
+
+import enemigos.*
+import jugador.*
+
+describe "Tests de autos" {
+
+    test "Un auto avanza hacia la derecha" {
+        const auto = new Auto(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 2,
+            color = "rojo"
+        )
+
+        auto.mover()
+
+        assert.equals(game.at(12, 0), auto.position())
+    }
+
+    test "Un auto avanza hacia la izquierda" {
+        const auto = new Auto(
+            position = game.at(10, 0),
+            direccion = -1,
+            velocidad = 2,
+            color = "azul"
+        )
+
+        auto.mover()
+        assert.equals(game.at(8, 0), auto.position())
+    }
+
+    test "A un auto se le asigna el color rojo" {
+        const auto = new Auto(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1,
+            color = "rojo"
+        )
+        assert.equals("enemigos/auto_rojo.png",auto.image())
+    }
+
+    test "A un auto se le asigna el color gris" {
+        const auto = new Auto(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1,
+            color = "gris"
+        )
+
+        assert.equals("enemigos/auto_gris.png", auto.image())
+    }
+
+    test "A un auto se le asigna el color azul" {
+        const auto = new Auto(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1,
+            color = "azul"
+        )
+
+        assert.equals("enemigos/auto_azul.png", auto.image())
+    }
+
+    test "Un auto es un taxi" {
+        const auto = new Auto(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1,
+            color = "taxi"
+        )
+
+        assert.equals("enemigos/auto_taxi.png", auto.image())
+    }
+
+    test "Un auto impacta al jugador y pierde una vida quedando en 2" {
+        const auto = new Auto(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1,
+            color = "taxi"
+        )
+        auto.afectarJugador(jugador)
+        assert.equals(2,jugador.vidas())
+    }
+}
+
+describe "Tests de colectivos" {
+    test "Un colectivo avanza hacia la derecha" {
+        const bondi = new Colectivo(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 2,
+            linea = 114
+        )
+
+        bondi.mover()
+
+        assert.equals(game.at(12, 0),bondi.position())
+    }
+
+    test "Un colectivo avanza hacia la izquierda" {
+        const bondi = new Colectivo(
+            position = game.at(10, 0),
+            direccion = -1,
+            velocidad = 2,
+            linea = 114
+        )
+
+        bondi.mover()
+
+        assert.equals(game.at(8, 0), bondi.position())
+    }
+
+    test "Un colectivo de la linea 7 avanza a la derecha con su imagen derecha" {
+        const bondi = new Colectivo(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1,
+            linea = 7
+        )
+
+        assert.equals("enemigos/colectivo_7_derecha.png", bondi.image())
+    }
+
+    test "Un colectivo de la linea 7 avanza a la izquierda con su imagen izquierda" {
+        const bondi = new Colectivo(
+            position = game.at(10, 0),
+            direccion = -1,
+            velocidad = 1,
+            linea = 7
+        )
+
+        assert.equals("enemigos/colectivo_7_izquierda.png",bondi.image())
+    }
+
+        test "Un colectivo de la linea 114 avanza a la derecha con su imagen derecha" {
+        const bondi = new Colectivo(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1,
+            linea = 114
+        )
+
+        assert.equals("enemigos/colectivo_114_derecha.png", bondi.image())
+    }
+
+    test "Un colectivo de la linea 114 avanza a la izquierda con su imagen izquierda" {
+        const bondi = new Colectivo(
+            position = game.at(10, 0),
+            direccion = -1,
+            velocidad = 1,
+            linea = 114
+        )
+
+        assert.equals("enemigos/colectivo_114_izquierda.png",bondi.image())
+    }
+
+        test "Un colectivo de la linea 145 avanza a la derecha con su imagen derecha" {
+        const bondi = new Colectivo(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1,
+            linea = 145
+        )
+
+        assert.equals("enemigos/colectivo_145_derecha.png", bondi.image())
+    }
+
+    test "Un colectivo de la linea 145 avanza a la izquierda con su imagen izquierda" {
+        const bondi = new Colectivo(
+            position = game.at(10, 0),
+            direccion = -1,
+            velocidad = 1,
+            linea = 145
+        )
+
+        assert.equals("enemigos/colectivo_145_izquierda.png",bondi.image())
+    }
+
+    test "Un colectivo impacta al jugador y pierde una vida quedando en 2" {
+        const bondi = new Colectivo(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1,
+            linea = 7
+        )
+        bondi.afectarJugador(jugador)
+        assert.equals(2,jugador.vidas())
+    }
+}
+
+describe "Tests de tren" {
+    test "Un tren avanza hacia la derecha" {
+        const tren = new Tren(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 2
+        )
+
+        tren.mover()
+
+        assert.equals(game.at(12, 0),tren.position())
+    }
+
+    test "Un tren avanza hacia la izquierda" {
+        const tren = new Tren(
+            position = game.at(10, 0),
+            direccion = -1,
+            velocidad = 2
+        )
+
+        tren.mover()
+
+        assert.equals(game.at(8, 0),tren.position())
+    }
+    
+    test "Un tren impacta al jugador y pierde una vida quedando en 2" {
+        const tren = new Tren(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1
+        )
+        tren.afectarJugador(jugador)
+        assert.equals(2,jugador.vidas())
+    }
+}
+
+describe "Tests de premetro" {
+    test "Un tren avanza hacia la derecha" {
+        const premetro = new Premetro(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 2
+        )
+
+        premetro.mover()
+        assert.equals(game.at(12, 0),premetro.position())
+    }
+
+    test "Un tren avanza hacia la izquierda" {
+        const premetro = new Premetro(
+            position = game.at(10, 0),
+            direccion = -1,
+            velocidad = 2
+        )
+
+        premetro.mover()
+        assert.equals(game.at(8, 0),premetro.position())
+    }
+    test "Un premetro impacta al jugador y pierde una vida quedando en 2" {
+        const premetro = new Premetro(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1
+        )
+        premetro.afectarJugador(jugador)
+        assert.equals(2,jugador.vidas())
+    }
+}
+
+describe "Tests de manifestación" {
+
+    test "Un tren avanza hacia la derecha" {
+        const manifesracion = new Manifestacion(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 2
+        )
+
+        manifesracion.mover()
+        assert.equals(game.at(12, 0),manifesracion.position())
+    }
+
+    test "Un tren avanza hacia la izquierda" {
+        const manifesracion = new Manifestacion(
+            position = game.at(10, 0),
+            direccion = -1,
+            velocidad = 2
+        )
+
+        manifesracion.mover()
+        assert.equals(game.at(8, 0),manifesracion.position())
+    }
+
+    test "Una manifestación impacta al jugador y pierde una vida quedando en 2" {
+        const manifesracion = new Manifestacion(
+            position = game.at(10, 0),
+            direccion = 1,
+            velocidad = 1
+        )
+        manifesracion.afectarJugador(jugador)
+        assert.equals(2,jugador.vidas())
+    }
+}
