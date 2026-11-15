@@ -56,3 +56,8 @@ object cartelVolverMenu inherits Visual(position = game.at(5, 5), image = "trans
     method text() = "ENTER: volver al menú"
     method textColor() = "FFFFFF"
 }
+
+object cartelGanaste inherits Visual(position = game.at(7, 7), image = "transparente.png") {
+    method text() = "GANASTE!"
+    method textColor() = "00FF00"
+}

@@ -39,6 +39,14 @@ object juego {
         menuPrincipal.mostrar()
     }
 
+    method ganar() {
+        game.clear()
+        game.addVisual(cartelGanaste)
+        game.addVisual(cartelVolverMenu)
+        self.cargarCosasGlobales()
+        keyboard.enter().onPressDo({ self.volverAlMenu() })
+    }
+
     method cargarCosasGlobales() {
         if (!game.hasVisual(iconoMusica)) {
             game.addVisual(iconoMusica)
