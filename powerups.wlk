@@ -58,3 +58,39 @@ object sinEscudo{
         sonidos.choque()
     }
 }
+
+class ObjetoPuntos {
+    var property position
+
+    method image()
+    
+    method darPuntos() {}
+
+}
+
+class Lapiz inherits ObjetoPuntos {
+    
+    override method image() = "powerups/lapiz.png"
+
+    override method darPuntos() {
+        //puntaje.puntos() += 200
+    }
+}
+
+class Regla inherits ObjetoPuntos {
+    
+    override method image() = "powerups/regla.png"
+
+    override method darPuntos() {
+       // puntaje.puntos() += 600
+    }
+}
+
+class Calculadora inherits ObjetoPuntos {
+    
+    override method image() = "powerups/calculadora.png"
+
+    override method darPuntos() {
+       // puntaje.puntos() += 1000
+    }
+}

@@ -40,21 +40,10 @@ class NivelCartel{
     method image() = "nivel" + nivel.toString() + ".png"
 }
 
-object cartelPerdiste inherits Visual(position = game.at(7, 7), image = "transparente.png") {
-    // Falta imagen para el cartel
-    method text() = "PERDISTE"
-    method textColor() = "FF0000"
-}
-
 class Corazon {
     const indice
     var property position
     method image() = if (jugador.vidas() > indice) "corazon.png" else "transparente.png"
-}
-
-object cartelVolverMenu inherits Visual(position = game.at(5, 5), image = "transparente.png") {
-    method text() = "ENTER: volver al menú"
-    method textColor() = "FFFFFF"
 }
 
 object cartelGanaste inherits Visual(position = game.at(7, 7), image = "transparente.png") {

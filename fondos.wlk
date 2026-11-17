@@ -34,3 +34,6 @@ object fondoPasto inherits Fondo {
     override method image() = "pasto.png"
 }
 
+object fondoPerder inherits Fondo {
+    override method image() = "gameover.png"
+}

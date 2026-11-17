@@ -23,8 +23,7 @@ object juego {
 
     method perder() {
         game.clear()
-        game.addVisual(cartelPerdiste)
-        game.addVisual(cartelVolverMenu)
+        game.addVisual(fondoPerder)
         self.cargarCosasGlobales()
         keyboard.enter().onPressDo({ self.volverAlMenu() })
         sonidos.gameOver()
@@ -41,8 +40,8 @@ object juego {
 
     method ganar() {
         game.clear()
-        game.addVisual(cartelGanaste)
-        game.addVisual(cartelVolverMenu)
+        game.addVisual(cartelGanaste) // esto no va
+        game.addVisual(fondoPerder) // falta fondoGanar
         self.cargarCosasGlobales()
         keyboard.enter().onPressDo({ self.volverAlMenu() })
     }
@@ -196,6 +195,7 @@ object pantallaAyuda {
 
     method ocultar() {
         game.clear() 
+        sonidos.selecBoton()
         menuPrincipal.mostrar()
     }
 }
