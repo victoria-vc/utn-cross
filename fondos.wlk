@@ -22,6 +22,14 @@ object fondoAyuda3 inherits Fondo {
     override method image() = "menu/ayuda/fondoAyuda3.png"
 }
 
+object fondoAyuda4 inherits Fondo {
+    override method image() = "menu/ayuda/fondoAyuda4.png"
+}
+
+object fondoAyuda5 inherits Fondo {
+    override method image() = "menu/ayuda/fondoAyuda5.png"
+}
+
 object fondoPasto inherits Fondo {
     override method image() = "pasto.png"
 }

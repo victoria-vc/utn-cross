@@ -143,7 +143,7 @@ object menuPrincipal {
 
 object pantallaAyuda {
 
-    const slides = [fondoAyuda1, fondoAyuda2, fondoAyuda3]
+    const slides = [fondoAyuda1, fondoAyuda2, fondoAyuda3, fondoAyuda4, fondoAyuda5]
     var indiceSlide = 0
 
     method mostrar() {
