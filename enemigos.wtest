@@ -257,37 +257,3 @@ describe "Tests de premetro" {
     }
 }
 
-describe "Tests de manifestación" {
-
-    test "Un tren avanza hacia la derecha" {
-        const manifesracion = new Manifestacion(
-            position = game.at(10, 0),
-            direccion = 1,
-            velocidad = 2
-        )
-
-        manifesracion.mover()
-        assert.equals(game.at(12, 0),manifesracion.position())
-    }
-
-    test "Un tren avanza hacia la izquierda" {
-        const manifesracion = new Manifestacion(
-            position = game.at(10, 0),
-            direccion = -1,
-            velocidad = 2
-        )
-
-        manifesracion.mover()
-        assert.equals(game.at(8, 0),manifesracion.position())
-    }
-
-    test "Una manifestación impacta al jugador y pierde una vida quedando en 2" {
-        const manifesracion = new Manifestacion(
-            position = game.at(10, 0),
-            direccion = 1,
-            velocidad = 1
-        )
-        manifesracion.afectarJugador(jugador)
-        assert.equals(2,jugador.vidas())
-    }
-}

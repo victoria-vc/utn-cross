@@ -25,6 +25,7 @@ object juego {
     method perder() {
         game.clear()
         game.addVisual(fondoPerder)
+        puntaje.mostrarEn(14, 0)
         self.cargarCosasGlobales()
         keyboard.enter().onPressDo({ self.volverAlMenu() })
         sonidos.gameOver()

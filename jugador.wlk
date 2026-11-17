@@ -80,6 +80,10 @@ object jugador {
     })
     }
 
+    method agarrarItem(){
+        sonidos.itemPickup()
+    }
+
 
 }
 

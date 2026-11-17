@@ -12,8 +12,8 @@ object mapa{
         return unaPosicion.x() >= 0 and unaPosicion.x() <= game.width() - 1 and unaPosicion.y() >= 0 and unaPosicion.y() <= game.height() - 1
     }
 
-    method ganoElNivel(unJugador){
-        return unJugador.position().y() == game.height() - 1
+    method ganoElNivel(unJugador) {
+        return unJugador.position() == game.at(9, 13) or unJugador.position() == game.at(10, 13)
     }
 
     method enemigoSalioDeGrilla(unEnemigo){

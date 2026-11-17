@@ -67,6 +67,7 @@ class Nivel {
 		game.addVisual(new NivelCartel(position = game.at(0, 0), nivel = nivelActual))
 		puntaje.mostrarEn(16, 13)
 		game.addVisual(iconoMusica)
+		game.addVisual(meta)
         musica.bajarVolumenParaNivel()
         
         juego.cargarCosasGlobales()
@@ -158,9 +159,9 @@ object niveles{
 	const nivel1 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 400, probabilidadEnemigos = 0.75, generadorEnemigos = [autoFactory], nivelActual = 1)
 	const nivel2 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 400, probabilidadEnemigos = 0.8, generadorEnemigos = [colectivoFactory], nivelActual = 2)
 	const nivel3 = new Nivel(imagenCamino = "via.png", ticksGeneracion = 600, probabilidadEnemigos = 0.6, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
-	const nivel4 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 700, probabilidadEnemigos = 0.6, generadorEnemigos = [manifestacionFactory, autoFactory], nivelActual = 4)
+	const nivel4 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 700, probabilidadEnemigos = 0.6, generadorEnemigos = [autoFactory, colectivoFactory, trenFactory, premetroFactory], nivelActual = 4)
 
-	var property nivelesCreados = [/*cinematicaInicio, */nivel1, nivel2, nivel3, nivel4]
+	var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3, nivel4]
 
 	method empezar(){
 		nivelesCreados.get(0).empezar()

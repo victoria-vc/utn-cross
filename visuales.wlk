@@ -28,6 +28,9 @@ object flechaMenu inherits Visual(position = game.at(3, 5), image = "menu/flecha
     method moverAbajo() { position = game.at(3, 3) }
 }
 
+object meta inherits Visual(position = game.at(9, 13), image = "meta.png") {
+}
+
 object marcadorVidas {
     var property position = game.at(1, 13)
     method text() = "Vidas: " + jugador.vidas()
@@ -50,3 +53,4 @@ object cartelGanaste inherits Visual(position = game.at(7, 7), image = "transpar
     method text() = "GANASTE!"
     method textColor() = "00FF00"
 }
+

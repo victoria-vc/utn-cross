@@ -16,7 +16,9 @@ class PowerUp {
         self.aplicarEfecto(unJugador)
     }
 
-    method aplicarEfecto(unJugador) {}
+    method aplicarEfecto(unJugador) {
+        unJugador.agarrarItem()
+    }
 }
 
 class Mate inherits PowerUp {
@@ -52,6 +54,10 @@ class Monster inherits PowerUp {
 class Lapiz inherits PowerUp {
     override method image() = "powerups/lapiz.png"
     override method puntos() = 200
+
+    override method aplicarEfecto(unJugador) {
+        unJugador.agarrarItem()
+    }
 }
 
 class Regla inherits PowerUp {

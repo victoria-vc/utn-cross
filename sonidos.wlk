@@ -43,4 +43,8 @@ object sonidos {
   method selecBoton() {
     game.sound("sonidos/selecBoton.mp3").play()
   }
+
+  method itemPickup() {
+    game.sound("sonidos/itemPickup.mp3").play()
+  }
 }

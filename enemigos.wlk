@@ -112,10 +112,6 @@ class Premetro inherits EnemigoLargo {
     override method cantidadCeldas() = 3
 }
 
-class Manifestacion inherits EnemigoLargo {
-    override method image() = "enemigos/manifestacion-" + (if (direccion == 1) "der" else "izq") + ".png"
-    override method cantidadCeldas() = 3 
-}
 
 
 object autoFactory {
@@ -157,12 +153,3 @@ object premetroFactory {
     }
 }
 
-object manifestacionFactory {
-    method generarEnemigo(posicion, direccion) {  
-        return new Manifestacion(
-            position = posicion, 
-            velocidad = (0.1).randomUpTo(0.5), 
-            direccion = direccion
-        )
-    }
-}
