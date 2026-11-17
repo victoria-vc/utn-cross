@@ -57,6 +57,10 @@ object juego {
         keyboard.m().onPressDo({ 
             musica.alternarMute()
         })
+
+        game.onTick(1000, "control_musica", {
+            musica.verificarSiguiente()
+        })
     }
 }
 

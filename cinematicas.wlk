@@ -9,7 +9,7 @@ import visuales.*
 
 object cinematicaInicio {
   var t = 0
-
+  
   method despues(ms, accion) {
     t += ms
     game.schedule(t, accion)
@@ -27,10 +27,19 @@ object cinematicaInicio {
   }
 
   method empezar() {
+    game.clear()
+    juego.cargarCosasGlobales()
     t = 0
     self.escenaCasa()
     self.escenaParada()
     self.despues(600, { niveles.pasarNivel() })
+  }
+
+  method traerIconoMusicaAlFrente() {
+    if (game.hasVisual(iconoMusica)) {
+      game.removeVisual(iconoMusica)
+    }
+    game.addVisual(iconoMusica)
   }
 
   method escenaCasa() {
@@ -38,9 +47,10 @@ object cinematicaInicio {
     game.addVisual(puertaCine)
     game.addVisual(mochilaCine)
     game.addVisual(protagonistaCine)
-    //self.despues(0, {})
+    self.traerIconoMusicaAlFrente()
+
     self.despues(800, {})
-    self.caminarProta( 3, 400)
+    self.caminarProta(3, 400)
     self.despues(300, {
       game.removeVisual(mochilaCine)
       protagonistaCine.agarrarMochila()
@@ -48,13 +58,14 @@ object cinematicaInicio {
     self.caminarProta(4, 400)
     self.despues(300, { puertaCine.image("cinematicas/inicio/puerta_abierta.png") })
     self.despues(500, {
-    game.removeVisual(protagonistaCine)
-    game.removeVisual(puertaCine)
-    game.removeVisual(fondoCine)
-    game.addVisual(fondoParada)
-  })
+      game.removeVisual(protagonistaCine)
+      game.removeVisual(puertaCine)
+      game.removeVisual(fondoCine)
+      game.addVisual(fondoParada)
+      self.traerIconoMusicaAlFrente()
+    })
   }
-
+  
   method escenaParada() {
     self.despues(600, {
       //game.boardGround("cinematicas/inicio/exterior_parada.png")
@@ -67,7 +78,6 @@ object cinematicaInicio {
     self.despues(500, { game.removeVisual(protagonistaCine) })
     self.caminar(colectivoCine, 6, -1, 0, 250)
   }
-  
 }
 
 object protagonistaCine {
@@ -84,7 +94,7 @@ object protagonistaCine {
   }
   method quieto() { paso = 0 }
 
-  
+
 }
 
 object puertaCine {

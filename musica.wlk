@@ -11,7 +11,6 @@ class Cancion {
 }
 
 object musica {
-    
     const musica1 = new Cancion(rutaArchivo="sonidos/musica1.mp3", duracion=69000)
     const musica2 = new Cancion(rutaArchivo="sonidos/musica2.mp3", duracion=93000)
     const musica3 = new Cancion(rutaArchivo="sonidos/musica3.mp3", duracion=93000)
@@ -22,27 +21,22 @@ object musica {
     var property estaMuteado = false
     var volumenActual = 0.7 
     var cancionSonando = null 
-
-    var idReproduccion = 0 
+    var tiempoTranscurrido = 0
 
     method iniciarPlaylistAleatoria() {
-        idReproduccion += 1 
-        const idActual = idReproduccion 
-        
         const ultimaCancion = cancionSonando
+        if (cancionSonando != null) {
+            cancionSonando.stop()
+        }
         
         const opciones = playlist.filter({ cancion => cancion != ultimaCancion })
         cancionSonando = opciones.anyOne()
+        tiempoTranscurrido = 0
         
         cancionSonando.volume(self.volumenCheck())
         cancionSonando.play()
-        
-        game.schedule(cancionSonando.duracion() + 2000, {
-            if (idReproduccion == idActual) {
-                self.iniciarPlaylistAleatoria() 
-            }
-        })
     }
+
     method volumenCheck() = if (estaMuteado) 0.0 else volumenActual
 
     method aplicarVolumen() {
@@ -67,9 +61,15 @@ object musica {
     }
 
     method saltarCancion() {
-        if (cancionSonando != null) {
-            cancionSonando.stop() 
-        }
         self.iniciarPlaylistAleatoria() 
+    }
+
+    method verificarSiguiente() {
+        if (cancionSonando != null) {
+            tiempoTranscurrido += 1000
+            if (tiempoTranscurrido >= cancionSonando.duracion() + 1500) {
+                self.iniciarPlaylistAleatoria()
+            }
+        }
     }
 }

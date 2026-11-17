@@ -158,7 +158,7 @@ object niveles{
 	const nivel1 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 400, probabilidadEnemigos = 0.75, generadorEnemigos = [autoFactory], nivelActual = 1)
 	const nivel2 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 400, probabilidadEnemigos = 0.8, generadorEnemigos = [colectivoFactory], nivelActual = 2)
 	const nivel3 = new Nivel(imagenCamino = "via.png", ticksGeneracion = 1300, probabilidadEnemigos = 0.45, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
-	const nivel4 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.45, generadorEnemigos = [autoFactory, colectivoFactory, trenFactory, premetroFactory], nivelActual = 4)
+	const nivel4 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.45, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 4)
 
 	var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3, nivel4, cinematicaFinal]
 
