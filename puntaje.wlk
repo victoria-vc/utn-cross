@@ -11,12 +11,16 @@ object puntaje {
 
     method mostrarEn(xInicial, y) {
         const divisores = [1000, 100, 10, 1]
+        const digitos = []
         (0 .. divisores.size() - 1).forEach({ i =>
-            game.addVisual(new DigitoPuntaje(
+            const digito = new DigitoPuntaje(
                 position = game.at(xInicial + i, y),
                 divisor = divisores.get(i)
-            ))
+            )
+            digitos.add(digito)
+            game.addVisual(digito)
         })
+        return digitos
     }
 }
 
@@ -27,4 +31,8 @@ class DigitoPuntaje {
     method digitoActual() = puntaje.puntos().div(divisor) % 10
 
     method image() = "numeros/" + self.digitoActual() + ".png"
+
+    method desplazar() {
+        position = position.up(0.16)
+    }
 }

@@ -1,6 +1,11 @@
 import wollok.game.*
 import niveles.*
 import juego.*
+import sonidos.*
+import fondos.*
+import musica.*
+import puntaje.*
+import visuales.*
 
 object cinematicaInicio {
   var t = 0
@@ -43,10 +48,11 @@ object cinematicaInicio {
     self.caminarProta(4, 400)
     self.despues(300, { puertaCine.image("cinematicas/inicio/puerta_abierta.png") })
     self.despues(500, {
-      game.removeVisual(protagonistaCine)
-      game.removeVisual(puertaCine)
-      fondoCine.image("cinematicas/inicio/exterior_parada.png")
-    })
+    game.removeVisual(protagonistaCine)
+    game.removeVisual(puertaCine)
+    game.removeVisual(fondoCine)
+    game.addVisual(fondoParada)
+  })
   }
 
   method escenaParada() {
@@ -96,11 +102,6 @@ object colectivoCine {
   var property image = "cinematicas/inicio/colectivo_cine.png"
 }
 
-object fondoCine {
-  var property position = game.at(0, 0)
-  var property image = "cinematicas/inicio/interior_casa.png"
-}
-
 object cinematicaFinal {
   var t = 0
 
@@ -117,9 +118,9 @@ object cinematicaFinal {
   method empezar() {
     t = 0
     protagonistaFinal.reiniciar()
+    sonidos.musicaGanar()
     game.addVisual(fondoFinal)
     game.addVisual(protagonistaFinal)
-
 
     self.despues(500, {})
     self.caminarProtaIzquierda(8, 400)
@@ -131,7 +132,8 @@ object cinematicaFinal {
 
     self.despues(6000, {
       game.removeTickEvent("saludo_animacion")
-      juego.ganar()
+      sonidos.frenarMusicaGanar()
+      creditos.empezar()
     })
   }
 }
@@ -176,10 +178,78 @@ object protagonistaFinal {
   
 }
 
- object fondoFinal {
+object creditos {
+  const items = []
+  var scrolleando = false
 
-  var property position = game.at(0, 0)
+  method empezar() {
+    game.clear()
+    items.clear()
+    scrolleando = true
 
-  var property image = "cinematicas/final/facultad_exterior.jpg"
+    game.addVisual(fondoNegro)
+    juego.cargarCosasGlobales()
+    musica.subirVolumenParaMenu()
 
-} 
+    const imagenes = [
+      "cinematicas/creditos/graciasypuntos.png",
+      "cinematicas/creditos/creditos1.png",
+      "cinematicas/creditos/creditos2.png",
+      "cinematicas/creditos/creditos3.png",
+      "cinematicas/creditos/creditos4.png",
+      "cinematicas/creditos/fondoFinalCreditos.png" 
+    ]
+
+    const separacion = 14
+    var ultimoItem = null
+
+    (0 .. imagenes.size() - 1).forEach({ i =>
+      const yInicial = -separacion - (i * separacion)
+      const item = new ItemCredito(
+        position = game.at(0, yInicial),
+        image = imagenes.get(i)
+      )
+      items.add(item)
+      game.addVisual(item)
+      ultimoItem = item
+
+      if (i == 0) {
+        items.addAll(puntaje.mostrarEn(9, yInicial + 10))
+      }
+    })
+
+    if (game.hasVisual(iconoMusica)) {
+      game.removeVisual(iconoMusica)
+      game.addVisual(iconoMusica)
+    }
+
+    game.onTick(60, "scroll_creditos", {
+      items.forEach({ item => item.desplazar() })
+      if (ultimoItem.position().y() >= 0) {
+        self.detenerScroll()
+        ultimoItem.position(game.at(0, 0)) 
+      }
+    })
+
+    keyboard.enter().onPressDo({
+      self.detenerScroll()
+      juego.volverAlMenu()
+    })
+  }
+
+  method detenerScroll() {
+    if (scrolleando) {
+      scrolleando = false
+      game.removeTickEvent("scroll_creditos")
+    }
+  }
+}
+
+class ItemCredito {
+  var property position
+  const property image
+
+  method desplazar() {
+    position = position.up(0.16)
+  }
+}

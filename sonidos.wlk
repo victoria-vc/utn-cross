@@ -36,6 +36,20 @@ object sonidos {
     game.sound("sonidos/gameOver.mp3").play()
   }
 
+  var sonidoGanar = null
+
+  method musicaGanar() {
+    sonidoGanar = game.sound("sonidos/musicaGanar.mp3")
+    sonidoGanar.play()
+    game.schedule(9000, { self.frenarMusicaGanar() })
+  }
+
+  method frenarMusicaGanar() {
+    if (sonidoGanar != null and sonidoGanar.played()) {
+      sonidoGanar.stop()
+    }
+  }
+
   method cambioBoton() {
     game.sound("sonidos/cambioBoton.mp3").play()
   }

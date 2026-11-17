@@ -37,3 +37,20 @@ object fondoPasto inherits Fondo {
 object fondoPerder inherits Fondo {
     override method image() = "gameover.png"
 }
+
+object fondoParada inherits Fondo {
+    override method image() = "cinematicas/inicio/exterior_parada.png"
+}
+
+ object fondoCine inherits Fondo {
+    override method image() = "cinematicas/inicio/interior_casa.png"
+} 
+
+object fondoNegro inherits Fondo {
+    override method image() = "cinematicas/creditos/fondoNegro.png"
+}
+
+ object fondoFinal inherits Fondo {
+    override method image() = "cinematicas/final/facultad_exterior.jpg"
+} 
+
