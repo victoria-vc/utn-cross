@@ -1,5 +1,6 @@
 import wollok.game.*
 import niveles.*
+import juego.*
 
 object cinematicaInicio {
   var t = 0
@@ -99,3 +100,86 @@ object fondoCine {
   var property position = game.at(0, 0)
   var property image = "cinematicas/inicio/interior_casa.png"
 }
+
+object cinematicaFinal {
+  var t = 0
+
+  method despues(ms, accion) {
+    t += ms
+    game.schedule(t, accion)
+  }
+
+  method caminarProtaIzquierda(pasos, msPorPaso) {
+    pasos.times({ i => self.despues(msPorPaso, { protagonistaFinal.retroceder() }) })
+    self.despues(70, { protagonistaFinal.quieto() })
+  }
+
+  method empezar() {
+    t = 0
+    protagonistaFinal.reiniciar()
+    game.addVisual(fondoFinal)
+    game.addVisual(protagonistaFinal)
+
+
+    self.despues(500, {})
+    self.caminarProtaIzquierda(8, 400)
+
+    self.despues(200, {
+      protagonistaFinal.empezarSaludo()
+      game.onTick(250, "saludo_animacion", { protagonistaFinal.alternarSaludo() })
+    })
+
+    self.despues(6000, {
+      game.removeTickEvent("saludo_animacion")
+      juego.ganar()
+    })
+  }
+}
+
+object protagonistaFinal {
+  var property position = game.at(18, 2)
+  var paso = 0
+  var saludando = false
+  var frameSaludo = 1
+
+  method image() {
+    if (saludando) {
+      return "cinematicas/final/pj_saludo" + frameSaludo + ".png"
+    } else {
+      return "cinematicas/final/pj_mochila_izq" + ["_paso1", "_paso1", "_paso2"].get(paso) + ".png"
+    }
+  }
+
+  method retroceder() {
+    position = position.left(1)
+    paso = if (paso == 1) 2 else 1
+  }
+
+  method quieto() {
+    paso = 0
+  }
+
+  method empezarSaludo() {
+    saludando = true
+  }
+
+  method alternarSaludo() {
+    frameSaludo = if (frameSaludo == 1) 2 else 1
+  }
+
+  method reiniciar() {
+    position = game.at(18, 2)
+    paso = 0
+    saludando = false
+    frameSaludo = 1
+  }
+  
+}
+
+ object fondoFinal {
+
+  var property position = game.at(0, 0)
+
+  var property image = "cinematicas/final/facultad_exterior.jpg"
+
+} 

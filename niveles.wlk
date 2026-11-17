@@ -161,7 +161,7 @@ object niveles{
 	const nivel3 = new Nivel(imagenCamino = "via.png", ticksGeneracion = 600, probabilidadEnemigos = 0.6, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
 	const nivel4 = new Nivel(imagenCamino = "calle.png", ticksGeneracion = 700, probabilidadEnemigos = 0.6, generadorEnemigos = [autoFactory, colectivoFactory, trenFactory, premetroFactory], nivelActual = 4)
 
-	var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3, nivel4]
+	var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3, nivel4, cinematicaFinal]
 
 	method empezar(){
 		nivelesCreados.get(0).empezar()
@@ -174,7 +174,7 @@ object niveles{
 		if(nivelActual < nivelesCreados.size()){
 			nivelesCreados.get(nivelActual).empezar()
 		}else{
-			juego.ganar()
+			cinematicaFinal.empezar()
 			}
 	}
 
