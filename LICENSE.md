@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Luca Wieczorek, Matias Lynch, Pablo Nicolas Palacio, Victoria Castagno
+Copyright (c) 2026 César Lencina, Luca Wieczorek, Matias Lynch, Pablo Nicolas Palacio, Victoria Castagno
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
