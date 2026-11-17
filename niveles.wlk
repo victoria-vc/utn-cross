@@ -9,6 +9,7 @@ import cinematicas.*
 import mapa.*
 import sonidos.*
 import musica.*
+import puntaje.*
 
 
 object generadorDeNivel {
@@ -64,7 +65,7 @@ class Nivel {
         movimientos.configControles(jugador)
 		(0 .. jugador.vidas()).forEach({ i => game.addVisual(new Corazon(indice = i, position = game.at(i, 13))) })
 		game.addVisual(new NivelCartel(position = game.at(0, 0), nivel = nivelActual))
-		game.addVisual(new Visual(position = game.at(19, 13), image = "flechaRoja.png"))
+		puntaje.mostrarEn(16, 13)
 		game.addVisual(iconoMusica)
         musica.bajarVolumenParaNivel()
         
@@ -128,11 +129,14 @@ class Nivel {
 		// Filas de pasto donde pueden aparecer Powerups
 		const filasPastoValidasPU = filasPasto.filter({ y => y > 0 and y < game.height() - 1 })
 
-		// MATE, ESCUDO y MONSTER al azar
+		// Powerups + Items al azar
 		if (!filasPastoValidasPU.isEmpty()) {
 			game.addVisual(new Mate(position = game.at((1 .. game.width() - 2).anyOne(), filasPastoValidasPU.anyOne())))
 			game.addVisual(new Escudo(position = game.at((1 .. game.width() - 2).anyOne(), filasPastoValidasPU.anyOne())))
 			game.addVisual(new Monster(position = game.at((1 .. game.width() - 2).anyOne(),filasPastoValidasPU.anyOne())))
+			game.addVisual(new Lapiz(position = game.at((1 .. game.width() - 2).anyOne(),filasPastoValidasPU.anyOne())))
+			game.addVisual(new Calculadora(position = game.at((1 .. game.width() - 2).anyOne(),filasPastoValidasPU.anyOne())))
+			game.addVisual(new Regla(position = game.at((1 .. game.width() - 2).anyOne(),filasPastoValidasPU.anyOne())))
 		}
 	
 	}

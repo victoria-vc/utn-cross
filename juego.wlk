@@ -5,6 +5,7 @@ import visuales.*
 import sonidos.*
 import musica.*
 import jugador.*
+import puntaje.*
 
 
 object juego {
@@ -32,6 +33,7 @@ object juego {
     method volverAlMenu() {
         jugador.reiniciar()
         niveles.reiniciar()
+        puntaje.reiniciar()
         game.clear()
         musica.subirVolumenParaMenu()
         menuPrincipal.reiniciarSeleccion()

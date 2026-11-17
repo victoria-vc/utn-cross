@@ -1,24 +1,29 @@
 import jugador.*
-import niveles.*
 import sonidos.*
-
+import niveles.*
+import puntaje.*
+import wollok.game.*
 
 class PowerUp {
     var property position
 
     method image()
-    
-    method afectarJugador(unJugador)  {
+    method puntos()
+
+    method afectarJugador(unJugador) {
         game.removeVisual(self)
+        puntaje.sumarPuntos(self.puntos())
+        self.aplicarEfecto(unJugador)
     }
 
+    method aplicarEfecto(unJugador) {}
 }
 
 class Mate inherits PowerUp {
     override method image() = "powerups/mate.png"
+    override method puntos() = 100
 
-    override method afectarJugador(unJugador) {
-        super(unJugador)
+    override method aplicarEfecto(unJugador) {
         unJugador.sumarVida()
     }
 }
@@ -26,9 +31,9 @@ class Mate inherits PowerUp {
 class Escudo inherits PowerUp {
     var property tiempoMs = 6000
     override method image() = "powerups/escudo.png"
+    override method puntos() = 150
 
-    override method afectarJugador(unJugador) {
-        super(unJugador)
+    override method aplicarEfecto(unJugador) {
         unJugador.activarEscudo(tiempoMs)
         sonidos.escudo()
     }
@@ -36,14 +41,28 @@ class Escudo inherits PowerUp {
 
 class Monster inherits PowerUp {
     override method image() = "powerups/monster.png"
+    override method puntos() = 150
 
-    override method afectarJugador(unJugador) {
-        super(unJugador)
-         unJugador.activarVelocidad()
-         sonidos.velocidad()
+    override method aplicarEfecto(unJugador) {
+        unJugador.activarVelocidad()
+        sonidos.velocidad()
     }
 }
 
+class Lapiz inherits PowerUp {
+    override method image() = "powerups/lapiz.png"
+    override method puntos() = 200
+}
+
+class Regla inherits PowerUp {
+    override method image() = "powerups/regla.png"
+    override method puntos() = 600
+}
+
+class Calculadora inherits PowerUp {
+    override method image() = "powerups/calculadora.png"
+    override method puntos() = 1000
+}
 object escudo{
     method perderVida(unJugador){
         unJugador.sacarEscudo()
@@ -59,38 +78,5 @@ object sinEscudo{
     }
 }
 
-class ObjetoPuntos {
-    var property position
 
-    method image()
-    
-    method darPuntos() {}
 
-}
-
-class Lapiz inherits ObjetoPuntos {
-    
-    override method image() = "powerups/lapiz.png"
-
-    override method darPuntos() {
-        //puntaje.puntos() += 200
-    }
-}
-
-class Regla inherits ObjetoPuntos {
-    
-    override method image() = "powerups/regla.png"
-
-    override method darPuntos() {
-       // puntaje.puntos() += 600
-    }
-}
-
-class Calculadora inherits ObjetoPuntos {
-    
-    override method image() = "powerups/calculadora.png"
-
-    override method darPuntos() {
-       // puntaje.puntos() += 1000
-    }
-}
