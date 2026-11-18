@@ -61,4 +61,8 @@ object sonidos {
   method itemPickup() {
     game.sound("sonidos/itemPickup.mp3").play()
   }
+
+  method pausa() {
+    game.sound("sonidos/pausa.mp3").play()
+  }
 }

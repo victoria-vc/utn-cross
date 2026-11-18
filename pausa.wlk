@@ -2,6 +2,7 @@ import wollok.game.*
 import juego.*
 import visuales.*
 import fondos.*
+import sonidos.*
 
 object pausa {
   var property activa = false
@@ -14,6 +15,7 @@ object pausa {
   method activar() {
     activa = true
     opcion = 0
+    sonidos.pausa()
     if (!game.hasVisual(fondoPausaVisual)) {
       game.addVisual(fondoPausaVisual)
     }
