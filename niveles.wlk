@@ -106,6 +106,7 @@ class Nivel {
                     const lado = if (ladoRandom > 0.5) 0 else game.width()
                     const direccion = if (ladoRandom > 0.5) 1 else -1
 
+
                     const nuevoEnemigo = generadorEnemigos.anyOne().generarEnemigo(game.at(lado, calle), direccion)
                     enemigos.add(nuevoEnemigo)
                     nuevoEnemigo.agregarAlJuego()
@@ -114,7 +115,7 @@ class Nivel {
         })
 
         game.onTick(100, "sacar_enemigos", {
-            const autosAfuera = enemigos.filter({enemigo => mapa.enemigoSalioDeGrilla(enemigo)})
+            const autosAfuera = enemigos.filter({enemigo => enemigo.salioDeGrilla()})
             autosAfuera.forEach({enemigo => enemigo.sacarDelJuego()})
             enemigos.removeAll(autosAfuera)
         })
@@ -161,12 +162,13 @@ object niveles{
 
 	var property nivelActual = 0
 
-	const nivel1 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 0.75, generadorEnemigos = [autoFactory], nivelActual = 1)
-	const nivel2 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 0.8, generadorEnemigos = [colectivoFactory], nivelActual = 2)
-	const nivel3 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 1300, probabilidadEnemigos = 0.45, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
-	const nivel4 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.45, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 4)
+	const nivel1 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 1, generadorEnemigos = [autoFactory], nivelActual = 1)
+	const nivel2 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 1, generadorEnemigos = [colectivoFactory], nivelActual = 2)
+	const nivel3 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 1300, probabilidadEnemigos = 0.8, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
+	const nivel4 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.7, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 4)
 
 	var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3, nivel4, cinematicaFinal]
+
 
 	method empezar(){
 		nivelesCreados.get(0).empezar()

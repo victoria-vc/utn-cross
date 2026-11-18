@@ -7,6 +7,8 @@ class Enemigo {
     var property direccion
     var property velocidad
 
+    method salioDeGrilla() = mapa.enemigoSalioDeGrilla(self)
+
     method image()
 
     method afectarJugador(unJugador) = unJugador.perderVida()
@@ -100,11 +102,27 @@ class EnemigoLargo inherits Enemigo {
         game.removeVisual(self)
         cola.forEach { celda => game.removeVisual(celda) }
     }
+
+    override method salioDeGrilla() {
+    return if (direccion == 1)
+        position.x() > game.width() + 5 and
+        cola.all({ parte => parte.position().x() > game.width() + 5 })
+    else
+        position.x() < -5 and
+        cola.all({ parte => parte.position().x() < -5 })
+}
 }
 
 class Tren inherits EnemigoLargo {
     override method image() = "enemigos/tren.png"
     override method cantidadCeldas() = 15
+
+    override method initialize() {
+        if (direccion == 1) {
+            position = position.left(15)
+        }
+        super()
+    }
 }
 
 class Premetro inherits EnemigoLargo {

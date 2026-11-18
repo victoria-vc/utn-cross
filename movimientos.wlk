@@ -20,7 +20,7 @@ object movimientos {
             if (pausa.activa()) {
                 pausa.subir()
             } else {
-                self.intentarMover(jugador, jugador.position().up(jugador.velocidad()))
+                jugador.moverA(jugador.position().up(1))
             }
         })
 
@@ -28,19 +28,19 @@ object movimientos {
             if (pausa.activa()) {
                 pausa.bajar()
             } else {
-                self.intentarMover(jugador, jugador.position().down(jugador.velocidad()))
+                jugador.moverA(jugador.position().down(1))
             }
         })
 
         keyboard.left().onPressDo({
             if (!pausa.activa()) {
-                self.intentarMover(jugador, jugador.position().left(jugador.velocidad()))
+                jugador.moverA(jugador.position().left(1))
             }
         })
 
         keyboard.right().onPressDo({
             if (!pausa.activa()) {
-                self.intentarMover(jugador, jugador.position().right(jugador.velocidad()))
+                jugador.moverA(jugador.position().right(1))
             }
         })
     }

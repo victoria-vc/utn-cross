@@ -13,26 +13,18 @@ object jugador {
 
     method image() = direccion.image()
 
-    method position(nuevaPosition) {
-        const temp = position
-        if ( mapa.estaEnGrilla(nuevaPosition)){
-            if (nuevaPosition.x() > position.x())
-                direccion = derecha
+    method moverA(nuevaPosition) {
+        if (nuevaPosition.x() > position.x())
+            direccion = derecha
+        if (nuevaPosition.x() < position.x())
+            direccion = izquierda
+        if (nuevaPosition.y() > position.y())
+            direccion = arriba
+        if (nuevaPosition.y() < position.y())
+            direccion = abajo
 
-            if (nuevaPosition.x() < position.x())
-                direccion = izquierda
-            
-            if (nuevaPosition.y() > position.y())
-                direccion = arriba
-
-            if (nuevaPosition.y() < position.y())
-                direccion = abajo
-
-            position = nuevaPosition
-            sonidos.moverPersonaje()
-        }else{
-            position = temp
-        }
+        direccion.mover()
+        
     }
 
     method reiniciarPosicion(){
@@ -64,6 +56,7 @@ object jugador {
     method perderVida() {
         escudoJugador.perderVida(self)
         if (self.perdio()) {
+            
             juego.perder()
         }
     }
@@ -89,17 +82,43 @@ object jugador {
 
 object derecha{
     method image() = "jugador/jugador_derecha.png"
+
+    method mover(){
+        jugador.velocidad().times({ i => 
+            if(mapa.estaEnGrilla(jugador.position().right(1))){
+                jugador.position(jugador.position().right(1))
+            }
+        })
+    }
 }
 
 object izquierda{
     method image() = "jugador/jugador_izquierda.png"
-
+    method mover(){
+        jugador.velocidad().times({ i =>
+            if(mapa.estaEnGrilla(jugador.position().left(1))){
+                jugador.position(jugador.position().left(1))
+            }
+        })
+    }
 }
 object arriba{
     method image() = "jugador/jugador_arriba.png"
-
+    method mover(){
+        jugador.velocidad().times({ i =>
+            if(mapa.estaEnGrilla(jugador.position().up(1))){
+                jugador.position(jugador.position().up(1))
+            }
+        })
+    }
 }
 object abajo{
     method image() = "jugador/jugador_abajo.png"
-
+    method mover(){
+        jugador.velocidad().times({ i =>
+            if(mapa.estaEnGrilla(jugador.position().down(1))){
+                jugador.position(jugador.position().down(1))
+            }
+        })
+    }
 }
