@@ -35,14 +35,22 @@ object pausa {
     if (game.hasVisual(fondoPausaVisual)) game.removeVisual(fondoPausaVisual)
   }
 
-  method subir() { opcion = 0 }
-  method bajar() { opcion = 1 }
+  method subir() { 
+    opcion = 0
+    sonidos.cambioBoton()
+     }
+  method bajar() { 
+    opcion = 1
+    sonidos.cambioBoton()
+   }
   method opcionActual() = opcion
 
   method confirmar() {
     if (opcion == 0) {
-      self.reanudar()
+        sonidos.selecBoton()
+        self.reanudar()
     } else {
+      sonidos.selecBoton()
       activa = false
       juego.volverAlMenu()
     }

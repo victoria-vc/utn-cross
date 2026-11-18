@@ -10,7 +10,7 @@ class Visual {
 }
 
 object iconoMusica {
-    var property position = game.at(19, 0) 
+    var property position = game.at(18, 0) 
 
     method z() = 99 // para que este encima de TODO
 
@@ -29,6 +29,9 @@ object flechaMenu inherits Visual(position = game.at(3, 5), image = "menu/flecha
 }
 
 object meta inherits Visual(position = game.at(9, 13), image = "meta.png") {
+}
+
+object iconoPausa inherits Visual(position = game.at(18, 1), image = "pausa/iconoPausa.png") {
 }
 
 object marcadorVidas {

@@ -44,7 +44,6 @@ object juego {
     method ganar() {
         game.clear()
         game.addVisual(cartelGanaste) // esto no va
-        game.addVisual(fondoPerder) // falta fondoGanar
         self.cargarCosasGlobales()
         keyboard.enter().onPressDo({ self.volverAlMenu() })
     }

@@ -21,7 +21,7 @@ object generadorDeNivel {
         var pastoSeguidas = 0
 
         (0 .. game.height() - 1).forEach({ y =>
-            const esBorde = y == 0 or y == game.height() - 1
+            const esBorde = y <= 1 or y == game.height() - 1
             var esCalle = false
 
             if (!esBorde) {
@@ -69,6 +69,7 @@ class Nivel {
 		puntaje.mostrarEn(16, 13)
 		game.addVisual(iconoMusica)
 		game.addVisual(meta)
+		game.addVisual(iconoPausa)
         musica.bajarVolumenParaNivel()
         
         juego.cargarCosasGlobales()
@@ -133,7 +134,7 @@ class Nivel {
 		})
 
 		// Filas de pasto donde pueden aparecer Powerups
-		const filasPastoValidasPU = filasPasto.filter({ y => y > 0 and y < game.height() - 1 })
+		const filasPastoValidasPU = filasPasto.filter({ y => y > 1 and y < game.height() - 1 })
 
 		// Powerups + Items al azar
 		if (!filasPastoValidasPU.isEmpty()) {
