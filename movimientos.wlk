@@ -1,7 +1,8 @@
+import wollok.game.*
 import jugador.*
 import enemigos.*
 import pausa.*
-
+import mapa.*
 
 object movimientos {
     method configControles(jugador) {
@@ -19,7 +20,7 @@ object movimientos {
             if (pausa.activa()) {
                 pausa.subir()
             } else {
-                jugador.position(jugador.position().up(jugador.velocidad()))
+                self.intentarMover(jugador, jugador.position().up(jugador.velocidad()))
             }
         })
 
@@ -27,20 +28,26 @@ object movimientos {
             if (pausa.activa()) {
                 pausa.bajar()
             } else {
-                jugador.position(jugador.position().down(jugador.velocidad()))
+                self.intentarMover(jugador, jugador.position().down(jugador.velocidad()))
             }
         })
 
         keyboard.left().onPressDo({
             if (!pausa.activa()) {
-                jugador.position(jugador.position().left(jugador.velocidad()))
+                self.intentarMover(jugador, jugador.position().left(jugador.velocidad()))
             }
         })
 
         keyboard.right().onPressDo({
             if (!pausa.activa()) {
-                jugador.position(jugador.position().right(jugador.velocidad()))
+                self.intentarMover(jugador, jugador.position().right(jugador.velocidad()))
             }
         })
+    }
+
+    method intentarMover(jugador, nuevaPos) {
+        if (mapa.puedeCaminar(nuevaPos)) {
+            jugador.position(nuevaPos)
+        }
     }
 }
