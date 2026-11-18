@@ -31,11 +31,11 @@ object fondoAyuda5 inherits Fondo {
 }
 
 object fondoPasto inherits Fondo {
-    override method image() = "pasto.png"
+    override method image() = "piso/pasto.png"
 }
 
 object fondoPerder inherits Fondo {
-    override method image() = "gameover.png"
+    override method image() = "cinematicas/final/gameover.png"
 }
 
 object fondoParada inherits Fondo {

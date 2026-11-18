@@ -16,9 +16,9 @@ object iconoMusica {
 
     method image() {
         if (musica.estaMuteado()) {
-            return "musicaOFF.png" 
+            return "interfaz/musicaOFF.png" 
         } else {
-            return "musicaON.png"  
+            return "interfaz/musicaON.png"  
         }
     }
 }
@@ -28,32 +28,23 @@ object flechaMenu inherits Visual(position = game.at(3, 5), image = "menu/flecha
     method moverAbajo() { position = game.at(3, 3) }
 }
 
-object meta inherits Visual(position = game.at(9, 13), image = "meta.png") {
+object meta inherits Visual(position = game.at(9, 13), image = "interfaz/meta.png") {
 }
 
-object iconoPausa inherits Visual(position = game.at(18, 1), image = "pausa/iconoPausa.png") {
+object iconoPausa inherits Visual(position = game.at(18, 1), image = "interfaz/iconoPausa.png") {
 }
 
-object marcadorVidas {
-    var property position = game.at(1, 13)
-    method text() = "Vidas: " + jugador.vidas()
-    method textColor() = "FFFFFF"
-}
 
 class NivelCartel{
     var property nivel
     var property position
-    method image() = "nivel" + nivel.toString() + ".png"
+    method image() = "nivel/nivel" + nivel.toString() + ".png"
 }
 
 class Corazon {
     const indice
     var property position
-    method image() = if (jugador.vidas() > indice) "corazon.png" else "transparente.png"
+    method image() = if (jugador.vidas() > indice) "interfaz/corazon.png" else "transparente.png"
 }
 
-object cartelGanaste inherits Visual(position = game.at(7, 7), image = "transparente.png") {
-    method text() = "GANASTE!"
-    method textColor() = "00FF00"
-}
 

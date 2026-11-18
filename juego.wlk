@@ -43,7 +43,6 @@ object juego {
 
     method ganar() {
         game.clear()
-        game.addVisual(cartelGanaste) // esto no va
         self.cargarCosasGlobales()
         keyboard.enter().onPressDo({ self.volverAlMenu() })
     }
