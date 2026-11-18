@@ -10,6 +10,7 @@ import mapa.*
 import sonidos.*
 import musica.*
 import puntaje.*
+import pausa.*
 
 
 object generadorDeNivel {
@@ -74,50 +75,54 @@ class Nivel {
 	}
 
 	method empezar() {
-		filasPasto.clear()
-		filasCalle.clear()
-		enemigos.clear()
-		
-		const filas = generadorDeNivel.generarFilas();
+        pausa.activa(false) 
+        filasPasto.clear()
+        filasCalle.clear()
+        enemigos.clear()
+        
+        const filas = generadorDeNivel.generarFilas();
 
-		(0 .. filas.size() - 1).forEach({ y =>
-			const esCalle = filas.get(y)
-			
-			if (esCalle) { 
-				filasCalle.add(y)
-				game.addVisual(new Visual(position = game.at(0, y), image = imagenCamino)) 
-			} else { 
-				filasPasto.add(y)
-				game.addVisual(new Visual(position = game.at(0, y), image = "pasto.png")) 
-			}
-		})
+        (0 .. filas.size() - 1).forEach({ y =>
+            const esCalle = filas.get(y)
+            
+            if (esCalle) { 
+                filasCalle.add(y)
+                game.addVisual(new Visual(position = game.at(0, y), image = imagenCamino)) 
+            } else { 
+                filasPasto.add(y)
+                game.addVisual(new Visual(position = game.at(0, y), image = "pasto.png")) 
+            }
+        })
 
-		self.cargarVisuales()
+        self.cargarVisuales()
 
-		game.onTick(ticksGeneracion, "generar_enemigos", {
+        game.onTick(ticksGeneracion, "generar_enemigos", {
+            if (!pausa.activa()) { 
+                if (!filasCalle.isEmpty() and 0.randomUpTo(1) < probabilidadEnemigos) {
+                    const calle = filasCalle.anyOne()
+                    
+                    const ladoRandom = 0.randomUpTo(1)
+                    const lado = if (ladoRandom > 0.5) 0 else game.width()
+                    const direccion = if (ladoRandom > 0.5) 1 else -1
 
-			if (!filasCalle.isEmpty() and 0.randomUpTo(1) < probabilidadEnemigos) {
-				const calle = filasCalle.anyOne()
-				
-				const ladoRandom = 0.randomUpTo(1)
-				const lado = if (ladoRandom > 0.5) 0 else game.width()
-				const direccion = if (ladoRandom > 0.5) 1 else -1
+                    const nuevoEnemigo = generadorEnemigos.anyOne().generarEnemigo(game.at(lado, calle), direccion)
+                    enemigos.add(nuevoEnemigo)
+                    nuevoEnemigo.agregarAlJuego()
+                }
+            }
+        })
 
-				const nuevoEnemigo = generadorEnemigos.anyOne().generarEnemigo(game.at(lado, calle), direccion)
-				enemigos.add(nuevoEnemigo)
-				nuevoEnemigo.agregarAlJuego()
-			}
-		})
+        game.onTick(100, "sacar_enemigos", {
+            const autosAfuera = enemigos.filter({enemigo => mapa.enemigoSalioDeGrilla(enemigo)})
+            autosAfuera.forEach({enemigo => enemigo.sacarDelJuego()})
+            enemigos.removeAll(autosAfuera)
+        })
 
-		game.onTick(100, "sacar_enemigos", { //saco de la visual y la lista los enemigos que estan fuera de la grilla
-			const autosAfuera = enemigos.filter({enemigo => mapa.enemigoSalioDeGrilla(enemigo)})
-			autosAfuera.forEach({enemigo => enemigo.sacarDelJuego()})
-			enemigos.removeAll(autosAfuera)
-		})
-
-		game.onTick(50, "movimiento_enemigos", {
-			enemigos.forEach({enemigo => enemigo.mover()})
-		})
+        game.onTick(50, "movimiento_enemigos", {
+            if (!pausa.activa()) { 
+                enemigos.forEach({enemigo => enemigo.mover()})
+            }
+        })
 
 		game.onTick(1000, "check_gano", {
 			self.pasarDeNivel()

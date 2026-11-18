@@ -54,3 +54,7 @@ object fondoNegro inherits Fondo {
     override method image() = "cinematicas/final/facultad_exterior.jpg"
 } 
 
+object fondoPausaVisual inherits Fondo {
+  override method image() = "pausa/fondoPausa.png"
+}
+
