@@ -110,7 +110,7 @@ class EnemigoLargo inherits Enemigo {
     else
         position.x() < -5 and
         cola.all({ parte => parte.position().x() < -5 })
-}
+    }
 }
 
 class Tren inherits EnemigoLargo {
@@ -129,8 +129,6 @@ class Premetro inherits EnemigoLargo {
     override method image() = "enemigos/premetro.png"
     override method cantidadCeldas() = 3
 }
-
-
 
 object autoFactory {
     method generarEnemigo(posicion, direccion){

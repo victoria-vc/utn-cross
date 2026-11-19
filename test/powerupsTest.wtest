@@ -1,0 +1,98 @@
+import powerups.*
+import jugador.*
+import puntaje.*
+
+describe "Tests de powerups" {
+
+    method initialize() {
+        game.clear()
+        game.width(20)
+        game.height(14)
+        jugador.reiniciar()
+    }
+
+    test "El mate suma una vida al jugador" {
+        const mate = new Mate(position = game.at(5, 5))
+        game.addVisual(mate)
+
+        mate.afectarJugador(jugador)
+
+        assert.equals(4, jugador.vidas())
+    }
+
+    test "El escudo activa la proteccion y evita perder vida ante un impacto" {
+        const itemEscudo = new Escudo(position = game.at(5, 5))
+        game.addVisual(itemEscudo)
+
+        itemEscudo.afectarJugador(jugador)
+        assert.equals(escudo, jugador.escudoJugador())
+
+        jugador.perderVida()
+        assert.equals(3, jugador.vidas())
+        assert.equals(sinEscudo, jugador.escudoJugador())
+    }
+
+    test "La Monster duplica la velocidad del jugador" {
+        const monster = new Monster(position = game.at(5, 5))
+        game.addVisual(monster)
+
+        monster.afectarJugador(jugador)
+
+        assert.equals(2, jugador.velocidad())
+    }
+
+    test "sinEscudo descuenta una vida al jugador" {
+        sinEscudo.perderVida(jugador)
+
+        assert.equals(2, jugador.vidas())
+    }
+
+    test "escudo no descuenta vidas al jugador" {
+        escudo.perderVida(jugador)
+
+        assert.equals(3, jugador.vidas())
+    }
+}
+
+describe "Tests de utiles escolares (items de puntaje)" {
+
+    method initialize() {
+        game.clear()
+        game.width(20)
+        game.height(14)
+        jugador.reiniciar()
+        puntaje.reiniciar() 
+    }
+
+    test "Agarrar un lapiz suma puntos sin alterar vidas ni velocidad" {
+        const lapiz = new Lapiz(position = game.at(5, 5))
+        const puntosAntes = puntaje.puntos()
+        game.addVisual(lapiz)
+
+        lapiz.afectarJugador(jugador)
+
+        assert.that(puntaje.puntos() > puntosAntes)
+        assert.equals(3, jugador.vidas())
+        assert.equals(1, jugador.velocidad())
+    }
+
+    test "Agarrar una calculadora suma puntos" {
+        const calculadora = new Calculadora(position = game.at(5, 5))
+        const puntosAntes = puntaje.puntos()
+        game.addVisual(calculadora)
+
+        calculadora.afectarJugador(jugador)
+
+        assert.that(puntaje.puntos() > puntosAntes)
+    }
+
+    test "Agarrar una regla suma puntos" {
+        const regla = new Regla(position = game.at(5, 5))
+        const puntosAntes = puntaje.puntos()
+        game.addVisual(regla)
+
+        regla.afectarJugador(jugador)
+
+        assert.that(puntaje.puntos() > puntosAntes)
+    }
+}

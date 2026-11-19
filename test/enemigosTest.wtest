@@ -198,7 +198,7 @@ describe "Tests de tren" {
 
         tren.mover()
 
-        assert.equals(game.at(12, 0),tren.position())
+        assert.equals(game.at(-3, 0), tren.position())
     }
 
     test "Un tren avanza hacia la izquierda" {
@@ -210,7 +210,7 @@ describe "Tests de tren" {
 
         tren.mover()
 
-        assert.equals(game.at(8, 0),tren.position())
+        assert.equals(game.at(8, 0), tren.position())
     }
     
     test "Un tren impacta al jugador y pierde una vida quedando en 2" {
@@ -225,7 +225,7 @@ describe "Tests de tren" {
 }
 
 describe "Tests de premetro" {
-    test "Un tren avanza hacia la derecha" {
+    test "Un premetro avanza hacia la derecha" {
         const premetro = new Premetro(
             position = game.at(10, 0),
             direccion = 1,
@@ -236,7 +236,7 @@ describe "Tests de premetro" {
         assert.equals(game.at(12, 0),premetro.position())
     }
 
-    test "Un tren avanza hacia la izquierda" {
+    test "Un premetro avanza hacia la izquierda" {
         const premetro = new Premetro(
             position = game.at(10, 0),
             direccion = -1,

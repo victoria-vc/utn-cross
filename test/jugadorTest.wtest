@@ -1,0 +1,119 @@
+import jugador.*
+import powerups.*
+
+describe "Tests de movimiento del jugador" {
+
+    method initialize() {
+        game.width(20)
+        game.height(14)
+        jugador.reiniciar()
+    }
+
+    test "El jugador se mueve hacia la derecha y actualiza su imagen" {
+        jugador.moverA(game.at(11, 0))
+
+        assert.equals(game.at(11, 0), jugador.position())
+        assert.equals("jugador/jugador_derecha.png", jugador.image())
+    }
+
+    test "El jugador se mueve hacia la izquierda y actualiza su imagen" {
+        jugador.moverA(game.at(9, 0))
+
+        assert.equals(game.at(9, 0), jugador.position())
+        assert.equals("jugador/jugador_izquierda.png", jugador.image())
+    }
+
+    test "El jugador se mueve hacia arriba y actualiza su imagen" {
+        jugador.moverA(game.at(10, 1))
+
+        assert.equals(game.at(10, 1), jugador.position())
+        assert.equals("jugador/jugador_arriba.png", jugador.image())
+    }
+
+    test "El jugador se mueve hacia abajo y actualiza su imagen" {
+        jugador.position(game.at(10, 5))
+        jugador.moverA(game.at(10, 4))
+
+        assert.equals(game.at(10, 4), jugador.position())
+        assert.equals("jugador/jugador_abajo.png", jugador.image())
+    }
+
+    test "El jugador no sale de la grilla al intentar bajar desde el borde inferior" {
+        jugador.moverA(game.at(10, -1))
+
+        assert.equals(game.at(10, 0), jugador.position())
+    }
+
+    test "Con velocidad activada el jugador avanza dos celdas" {
+        jugador.activarVelocidad()
+        jugador.moverA(game.at(11, 0))
+
+        assert.equals(2, jugador.velocidad())
+        assert.equals(game.at(12, 0), jugador.position())
+    }
+}
+
+describe "Tests de vidas y powerups del jugador" {
+
+    method initialize() {
+        game.width(20)
+        game.height(14)
+        jugador.reiniciar()
+    }
+
+    test "El jugador arranca con 3 vidas y sin perder" {
+        assert.equals(3, jugador.vidas())
+        assert.notThat(jugador.perdio())
+    }
+
+    test "El jugador pierde una vida al recibir daño sin escudo" {
+        jugador.perderVida()
+
+        assert.equals(2, jugador.vidas())
+    }
+
+    test "El jugador suma una vida al agarrar un item de vida" {
+        jugador.sumarVida()
+
+        assert.equals(4, jugador.vidas())
+    }
+
+    test "El jugador pierde la partida cuando se queda sin vidas" {
+        jugador.sacarVida()
+        jugador.sacarVida()
+        jugador.sacarVida()
+
+        assert.equals(0, jugador.vidas())
+        assert.that(jugador.perdio())
+    }
+
+    test "Con escudo activo el jugador no pierde vidas al recibir impacto" {
+        jugador.activarEscudo(5000)
+        jugador.perderVida()
+
+        assert.equals(3, jugador.vidas())
+    }
+
+    test "Al sacarse el escudo el jugador vuelve a recibir daño" {
+        jugador.activarEscudo(5000)
+        jugador.sacarEscudo()
+        jugador.perderVida()
+
+        assert.equals(sinEscudo, jugador.escudoJugador())
+        assert.equals(2, jugador.vidas())
+    }
+
+    test "Reiniciar restaura vidas, posicion, velocidad y escudo" {
+        jugador.position(game.at(15, 8))
+        jugador.sacarVida()
+        jugador.activarEscudo(5000)
+        jugador.activarVelocidad()
+
+        jugador.reiniciar()
+
+        assert.equals(game.at(10, 0), jugador.position())
+        assert.equals(3, jugador.vidas())
+        assert.equals(1, jugador.velocidad())
+        assert.equals(sinEscudo, jugador.escudoJugador())
+    }
+}
