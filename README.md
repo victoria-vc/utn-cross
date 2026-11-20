@@ -64,4 +64,4 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 [calle]: assets/readme/calle.png
 [capturas]: assets/readme/capturas.png
 [captura1]: assets/readme/captura1.jpg
-[captura1]: assets/readme/captura2.jpg
+[captura2]: assets/readme/captura2.jpg
