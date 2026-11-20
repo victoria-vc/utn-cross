@@ -50,22 +50,20 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 
 ![captura2][captura2]
 
-![Integrantes][integrantes]
-
-César Lencina 
-
-Luca Wieczorek
-
-Matias Lynch
-
-Pablo Nicolas Palacio
-
-Victoria Castagno
-
 
 ![Info][infodel]
 
 ![Tp][tp]
+
+El juego fue desarrollado para la materia **Paradigmas de Programación** de la carrera Ingeniería en Sistemas de Información (UTN FRBA), con el objetivo de aplicar los conceptos del paradigma orientado a objetos.
+
+**Integrantes del grupo**: César Lencina, Luca Wieczorek, Matias Lynch, Pablo Nicolas Palacio, Victoria Castagno
+
+**Profesor**: Pedro Jara
+
+**Curso**: K2051
+
+**Año**: 2026 
 
 [img-intro]: assets/readme/introduccion.png
 [img-juego]: assets/readme/juego.png
@@ -82,6 +80,5 @@ Victoria Castagno
 [capturas]: assets/readme/capturas.png
 [captura1]: assets/readme/captura1.jpg
 [captura2]: assets/readme/captura2.jpg
-[integrantes]: assets/readme/integrantes.png
 [infodel]: assets/readme/info-del.png
 [tp]: assets/readme/tp.png
