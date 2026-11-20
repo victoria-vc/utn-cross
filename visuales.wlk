@@ -34,6 +34,14 @@ object meta inherits Visual(position = game.at(9, 13), image = "interfaz/meta.pn
 object iconoPausa inherits Visual(position = game.at(18, 1), image = "interfaz/iconoPausa.png") {
 }
 
+object iconoEnter inherits Visual(position = game.at(18, 1), image = "interfaz/iconoEnter.png") {
+}
+
+object iconoAbajo inherits Visual(position = game.at(18, 2), image = "interfaz/iconoAbajo.png") {
+}
+
+object iconoArriba inherits Visual(position = game.at(18, 3), image = "interfaz/iconoArriba.png") {
+}
 
 class NivelCartel{
     var property nivel
