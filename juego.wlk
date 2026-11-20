@@ -68,6 +68,9 @@ object menuPrincipal {
 
     method mostrar() {
         game.addVisual(fondoMenu) 
+        game.addVisual(iconoAbajo)
+        game.addVisual(iconoArriba)
+        game.addVisual(iconoEnter)
         juego.cargarCosasGlobales() 
         self.mostrarBotones() 
 
