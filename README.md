@@ -18,10 +18,7 @@ Hay 5 niveles; en cada uno de ellos el objetivo es llegar al otro lado de la pan
 ![Enemigos][img-enemigos]
 
 El juego consta de 3 tipos de enemigos distintos, donde todos te sacan una vida.
-- Autos
-- Bondis
-- Trenes
-- 
+
 ![Auto][auto]
 
 ![Bondi][bondi]
