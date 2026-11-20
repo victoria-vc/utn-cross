@@ -11,6 +11,7 @@ import sonidos.*
 import musica.*
 import puntaje.*
 import pausa.*
+import obstaculos.*
 
 
 object generadorDeNivel {
@@ -134,19 +135,31 @@ class Nivel {
     		elemento.afectarJugador(jugador)
 		})
 
-		// Filas de pasto donde pueden aparecer Powerups
-		const filasPastoValidasPU = filasPasto.filter({ y => y > 1 and y < game.height() - 1 })
+		// Filas de pasto donde pueden aparecer Powerups y Obstáculos
+		const filasPastoValidas = filasPasto.filter({ y => y > 1 and y < game.height() - 1 })
+		const posicionesOcupadas = []
 
-		// Powerups + Items al azar
-		if (!filasPastoValidasPU.isEmpty()) {
-			game.addVisual(new Mate(position = game.at((1 .. game.width() - 2).anyOne(), filasPastoValidasPU.anyOne())))
-			game.addVisual(new Escudo(position = game.at((1 .. game.width() - 2).anyOne(), filasPastoValidasPU.anyOne())))
-			game.addVisual(new Monster(position = game.at((1 .. game.width() - 2).anyOne(),filasPastoValidasPU.anyOne())))
-			game.addVisual(new Lapiz(position = game.at((1 .. game.width() - 2).anyOne(),filasPastoValidasPU.anyOne())))
-			game.addVisual(new Calculadora(position = game.at((1 .. game.width() - 2).anyOne(),filasPastoValidasPU.anyOne())))
-			game.addVisual(new Regla(position = game.at((1 .. game.width() - 2).anyOne(),filasPastoValidasPU.anyOne())))
+		if (!filasPastoValidas.isEmpty()) {
+			mapa.generarObstaculosEnPasto(filasPastoValidas, 5)
+
+			game.addVisual(new Mate(position = self.posicionLibre(filasPastoValidas, posicionesOcupadas)))
+			game.addVisual(new Escudo(position = self.posicionLibre(filasPastoValidas, posicionesOcupadas)))
+			game.addVisual(new Monster(position = self.posicionLibre(filasPastoValidas, posicionesOcupadas)))
+			game.addVisual(new Lapiz(position = self.posicionLibre(filasPastoValidas, posicionesOcupadas)))
+			game.addVisual(new Calculadora(position = self.posicionLibre(filasPastoValidas, posicionesOcupadas)))
+			game.addVisual(new Regla(position = self.posicionLibre(filasPastoValidas, posicionesOcupadas)))
 		}
 	
+	} 
+
+	method posicionLibre(filasValidas, ocupadas) {
+		const pos = game.at((1 .. game.width() - 2).anyOne(), filasValidas.anyOne())
+		return if (ocupadas.contains(pos) or mapa.hayObstaculoEn(pos)) {
+			self.posicionLibre(filasValidas, ocupadas)
+		} else {
+			ocupadas.add(pos)
+			pos
+		}
 	}
 	
 	method pasarDeNivel() {
@@ -155,10 +168,9 @@ class Nivel {
 			niveles.pasarNivel()
 		}
 	}
+} 
 
-}
-
-object niveles{
+object niveles {
 
 	var property nivelActual = 0
 
