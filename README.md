@@ -60,11 +60,13 @@ Matias Lynch
 
 Pablo Nicolas Palacio
 
+Victoria Castagno
+
+
 ![Info][infodel]
 
-![Tp][tp
-]
-Victoria Castagno
+![Tp][tp]
+
 [img-intro]: assets/readme/introduccion.png
 [img-juego]: assets/readme/juego.png
 [img-enemigos]: assets/readme/enemigos.png
