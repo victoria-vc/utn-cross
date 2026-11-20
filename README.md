@@ -28,8 +28,11 @@ El juego consta de 3 tipos de enemigos distintos, donde todos te sacan una vida.
 ![Powerups][img-powerups]
 
 A lo largo del juego vamos a encontrar elementos que nos pueden servir para seguir avanzando. Estos elementos los debemos recolectar a medida que recorremos los niveles.
+
 ![Mate][mate] (otorga 1 vida extra)
+
 ![Monster][monster] (velocidad)
+
 ![Escudo][escudo] (te hace inmune a los enemigos)
 
 
