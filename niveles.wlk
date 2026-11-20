@@ -140,7 +140,7 @@ class Nivel {
 		const posicionesOcupadas = []
 
 		if (!filasPastoValidas.isEmpty()) {
-			mapa.generarObstaculosEnPasto(filasPastoValidas, 5)
+			mapa.generarObstaculosEnPasto(filasPastoValidas, 10)
 
 			game.addVisual(new Mate(position = self.posicionLibre(filasPastoValidas, posicionesOcupadas)))
 			game.addVisual(new Escudo(position = self.posicionLibre(filasPastoValidas, posicionesOcupadas)))
@@ -176,9 +176,9 @@ object niveles {
 
 	const nivel1 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 1, generadorEnemigos = [autoFactory], nivelActual = 1)
 	const nivel2 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 1, generadorEnemigos = [colectivoFactory], nivelActual = 2)
-	const nivel3 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 1300, probabilidadEnemigos = 0.8, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
+	const nivel3 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 1500, probabilidadEnemigos = 0.6, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
 	const nivel4 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.7, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 4)
-    const nivel5 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 1300, probabilidadEnemigos = 0.8, generadorEnemigos = [trenFactory], nivelActual = 5)
+    const nivel5 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 1500, probabilidadEnemigos = 0.8, generadorEnemigos = [trenFactory], nivelActual = 5)
     const nivel6 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.7, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 6)
 
 	var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, cinematicaFinal]
