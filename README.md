@@ -50,7 +50,21 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 
 ![captura2][captura2]
 
+![Integrantes][integrantes]
 
+César Lencina 
+
+Luca Wieczorek
+
+Matias Lynch
+
+Pablo Nicolas Palacio
+
+![Info][infodel]
+
+![Tp][tp
+]
+Victoria Castagno
 [img-intro]: assets/readme/introduccion.png
 [img-juego]: assets/readme/juego.png
 [img-enemigos]: assets/readme/enemigos.png
@@ -66,3 +80,6 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 [capturas]: assets/readme/capturas.png
 [captura1]: assets/readme/captura1.jpg
 [captura2]: assets/readme/captura2.jpg
+[integrantes]: assets/readme/integrantes.png
+[infodel]: assets/readme/info-del.png
+[tp]: assets/readme/tp.png
