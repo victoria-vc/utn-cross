@@ -1,5 +1,7 @@
 import jugador.*
 import powerups.*
+import enemigos.*
+import mapa.*
 
 describe "Tests de movimiento del jugador" {
 
@@ -50,6 +52,28 @@ describe "Tests de movimiento del jugador" {
 
         assert.equals(2, jugador.velocidad())
         assert.equals(game.at(12, 0), jugador.position())
+    }
+
+    test "El jugador no puede caminar sobre la zona UI de vidas ni de puntaje" {
+        // Zona vidas: y == 13, x entre 0 y 2
+        jugador.position(game.at(3, 13))
+        jugador.moverA(game.at(2, 13))
+        assert.equals(game.at(3, 13), jugador.position())
+
+        // Zona puntaje: y == 13, x entre 16 y 19
+        jugador.position(game.at(15, 13))
+        jugador.moverA(game.at(16, 13))
+        assert.equals(game.at(15, 13), jugador.position())
+    }
+
+    test "El jugador gana el nivel al llegar a las celdas de meta (9, 13) o (10, 13)" {
+        jugador.position(game.at(9, 12))
+        jugador.moverA(game.at(9, 13))
+        assert.that(mapa.ganoElNivel(jugador))
+
+        jugador.position(game.at(10, 12))
+        jugador.moverA(game.at(10, 13))
+        assert.that(mapa.ganoElNivel(jugador))
     }
 }
 
@@ -116,4 +140,32 @@ describe "Tests de vidas y powerups del jugador" {
         assert.equals(1, jugador.velocidad())
         assert.equals(sinEscudo, jugador.escudoJugador())
     }
+
+    test "Cuando el jugador sin escudo es chocado por un auto, pierde una vida y queda destrozado" {
+        const auto = new Auto(position = game.at(10, 0), direccion = 1, velocidad = 1, color = "rojo")
+        auto.afectarJugador(jugador)
+
+        assert.equals(2, jugador.vidas())
+        assert.equals("jugador/jugador_destrozado.png", jugador.image())
+    }
+
+    test "Mientras el jugador esta destrozado por un choque, un segundo impacto seguido no le saca otra vida" {
+        const auto = new Auto(position = game.at(10, 0), direccion = 1, velocidad = 1, color = "azul")
+        const tren = new Tren(position = game.at(10, 0), direccion = 1, velocidad = 1)
+
+        auto.afectarJugador(jugador)
+        tren.afectarJugador(jugador)
+
+        assert.equals(2, jugador.vidas())
+    }
+
+    test "Mientras el jugador esta destrozado, no puede desplazarse" {
+        const auto = new Auto(position = game.at(10, 5), direccion = 1, velocidad = 1, color = "taxi")
+        jugador.position(game.at(10, 5))
+        auto.afectarJugador(jugador)
+
+        jugador.moverA(game.at(10, 6))
+        assert.equals(game.at(10, 5), jugador.position())
+    }
+
 }
