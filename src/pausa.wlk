@@ -4,6 +4,7 @@ import visuales.*
 import fondos.*
 import sonidos.*
 
+
 object pausa {
   var property activa = false
   var opcion = 0 

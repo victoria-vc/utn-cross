@@ -62,12 +62,12 @@ class Lapiz inherits PowerUp {
 
 class Regla inherits PowerUp {
     override method image() = "powerups/regla.png"
-    override method puntos() = 600
+    override method puntos() = 400
 }
 
 class Calculadora inherits PowerUp {
     override method image() = "powerups/calculadora.png"
-    override method puntos() = 1000
+    override method puntos() = 300
 }
 object escudo{
     method perderVida(unJugador){
@@ -78,7 +78,7 @@ object escudo{
 object sinEscudo{
     method perderVida(unJugador){
         console.println("perder vida")
-        jugador.reiniciarPosicion()
+        jugador.mostrarChoque()
         unJugador.sacarVida()
         sonidos.choque()
     }

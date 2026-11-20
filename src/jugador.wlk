@@ -14,6 +14,7 @@ object jugador {
     method image() = direccion.image()
 
     method moverA(nuevaPosition) {
+    if (direccion.puedeActuar()) {
         if (nuevaPosition.x() > position.x())
             direccion = derecha
         if (nuevaPosition.x() < position.x())
@@ -24,19 +25,20 @@ object jugador {
             direccion = abajo
 
         direccion.mover()
-        
     }
+}
 
     method reiniciarPosicion(){
         position = game.at(10, 0)
     }
 
     method reiniciar() {
-        vidas = 3
-        escudoJugador = sinEscudo
-        velocidad = 1
-        self.reiniciarPosicion()
-    }
+    vidas = 3
+    escudoJugador = sinEscudo
+    velocidad = 1
+    direccion = derecha
+    self.reiniciarPosicion()
+}
 
     method activarEscudo(tiempo){
         escudoJugador = escudo
@@ -54,12 +56,13 @@ object jugador {
     method perdio() = vidas < 1 
 
     method perderVida() {
+    if (direccion.puedeActuar()) {
         escudoJugador.perderVida(self)
         if (self.perdio()) {
-            
             juego.perder()
         }
     }
+}
 
     method sumarVida(){
         vidas += 1
@@ -77,48 +80,66 @@ object jugador {
         sonidos.itemPickup()
     }
 
+    method mostrarChoque() {
+    direccion = destrozado
+    game.schedule(500, { 
+        direccion = derecha
+        self.reiniciarPosicion()
+    })
+}
 
 }
 
-object derecha{
+object derecha {
     method image() = "jugador/jugador_derecha.png"
-
-    method mover(){
+    method puedeActuar() = true
+    method mover() {
         jugador.velocidad().times({ i => 
-            if(mapa.estaEnGrilla(jugador.position().right(1))){
+            if(mapa.puedeCaminar(jugador.position().right(1))){
                 jugador.position(jugador.position().right(1))
             }
         })
     }
 }
 
-object izquierda{
+object izquierda {
     method image() = "jugador/jugador_izquierda.png"
-    method mover(){
+    method puedeActuar() = true
+    method mover() {
         jugador.velocidad().times({ i =>
-            if(mapa.estaEnGrilla(jugador.position().left(1))){
+            if(mapa.puedeCaminar(jugador.position().left(1))){
                 jugador.position(jugador.position().left(1))
             }
         })
     }
 }
-object arriba{
+
+object arriba {
     method image() = "jugador/jugador_arriba.png"
-    method mover(){
+    method puedeActuar() = true
+    method mover() {
         jugador.velocidad().times({ i =>
-            if(mapa.estaEnGrilla(jugador.position().up(1))){
+            if(mapa.puedeCaminar(jugador.position().up(1))){
                 jugador.position(jugador.position().up(1))
             }
         })
     }
 }
-object abajo{
+
+object abajo {
     method image() = "jugador/jugador_abajo.png"
-    method mover(){
+    method puedeActuar() = true
+    method mover() {
         jugador.velocidad().times({ i =>
-            if(mapa.estaEnGrilla(jugador.position().down(1))){
+            if(mapa.puedeCaminar(jugador.position().down(1))){
                 jugador.position(jugador.position().down(1))
             }
         })
     }
+}
+
+object destrozado {
+    method image() = "jugador/jugador_destrozado.png" 
+    method mover() {} 
+    method puedeActuar() = false
 }

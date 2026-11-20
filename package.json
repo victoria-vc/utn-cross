@@ -1,9 +1,9 @@
 {
-    "name": "repo-base",
+    "name": "utn-cross",
     "version": "1.0.0",
     "wollokVersion": "4.2.3",
-    "author": "arell",
-    "license": "ISC",
+    "author": "César Lencina, Luca Wieczorek, Matias Lynch, Pablo Nicolas Palacio, Victoria Castagno",
+    "license": "MIT",
     "resourceFolder": "assets"
   }
   

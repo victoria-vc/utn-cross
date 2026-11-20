@@ -63,7 +63,6 @@ class Colectivo inherits Enemigo {
     }
 }
 
-
 class ColaEnemigoLargo inherits Enemigo {
     override method image() = "enemigos/transparente.png" 
     override method mover() {}   
