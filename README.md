@@ -28,10 +28,11 @@ El juego consta de 3 tipos de enemigos distintos, donde todos te sacan una vida.
 ![Powerups][img-powerups]
 
 A lo largo del juego vamos a encontrar elementos que nos pueden servir para seguir avanzando. Estos elementos los debemos recolectar a medida que recorremos los niveles.
-- Mate (otorga 1 vida extra)
-- Monster (velocidad)
-- Escudo (te hace inmune a los enemigos)
-- 
+![Mate][mate] (otorga 1 vida extra)
+![Monster][monster] (velocidad)
+![Escudo][escudo] (te hace inmune a los enemigos)
+
+
 ![Puntos][img-puntos]
 
 Los puntos se consiguen recolectando los powerups y los distintos objetos que están dispersos por el mapa. Mientras más agarres, más puntos conseguís.
@@ -44,3 +45,6 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 [auto]: assets/readme/auto-rojo.png
 [bondi]: assets/readme/bondi-7.png
 [tren]: assets/readme/trencito.png
+[mate]: assets/readme/mate.png
+[escudo]: assets/readme/escudo.png 
+[monster]: assets/readme/monster.png 
