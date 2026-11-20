@@ -43,6 +43,7 @@ A lo largo del juego vamos a encontrar elementos que nos pueden servir para segu
 
 Los puntos se consiguen recolectando los powerups y los distintos objetos que están dispersos por el mapa. Mientras más agarres, más puntos conseguís.
 
+![Calle][calle]
 
 ![capturas][capturas]
 
@@ -50,6 +51,7 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 
 ![captura2][captura2]
 
+![Calle][calle]
 
 ![Info][infodel]
 
@@ -64,6 +66,8 @@ El juego fue desarrollado para la materia **Paradigmas de Programación** de la 
 **Curso**: K2051
 
 **Año**: 2026 
+
+![Calle][calle]
 
 [img-intro]: assets/readme/introduccion.png
 [img-juego]: assets/readme/juego.png
