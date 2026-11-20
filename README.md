@@ -1,9 +1,10 @@
+![Calle][calle]
 <p align="center">
   <img src="assets/readme/titulo-chico.gif" alt="UTN Cross" width="1000" />
 </p>
 
 </p>
-
+![Calle][calle]
 
 ![Introducción][img-intro]
 
@@ -40,6 +41,14 @@ A lo largo del juego vamos a encontrar elementos que nos pueden servir para segu
 
 Los puntos se consiguen recolectando los powerups y los distintos objetos que están dispersos por el mapa. Mientras más agarres, más puntos conseguís.
 
+
+![capturas][capturas]
+
+![captura1][capturas]
+
+![capturas][captura1]
+
+
 [img-intro]: assets/readme/introduccion.png
 [img-juego]: assets/readme/juego.png
 [img-enemigos]: assets/readme/enemigos.png
@@ -51,3 +60,7 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 [mate]: assets/readme/mate.png
 [escudo]: assets/readme/escudo.png 
 [monster]: assets/readme/monster.png 
+[calle]: assets/readme/calle.png
+[capturas]: assets/readme/capturas.png
+[captura1]: assets/readme/captura2.png
+[captura1]: assets/readme/captura2.png
