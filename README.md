@@ -4,6 +4,7 @@
 </p>
 
 </p>
+
 ![Calle][calle]
 
 ![Introducción][img-intro]
@@ -44,9 +45,9 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 
 ![capturas][capturas]
 
-![captura1][capturas]
+![captura1][captura1]
 
-![capturas][captura1]
+![capturas][captura2]
 
 
 [img-intro]: assets/readme/introduccion.png
@@ -61,6 +62,6 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 [escudo]: assets/readme/escudo.png 
 [monster]: assets/readme/monster.png 
 [calle]: assets/readme/calle.png
-[capturas]: assets/readme/capturas.png
-[captura1]: assets/readme/captura2.png
-[captura1]: assets/readme/captura2.png
+[capturas]: assets/readme/captura1.jpg
+[captura1]: assets/readme/captura2.jpg
+[captura1]: assets/readme/captura2.jpg
