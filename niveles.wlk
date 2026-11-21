@@ -60,6 +60,10 @@ class Nivel {
 	const property ticksGeneracion
 	const property probabilidadEnemigos
 
+	const maxEnemigos 
+	const maxPorCalle
+	const distanciaMinima
+
 	const imagenCamino
 
 	method cargarVisuales(){
@@ -75,6 +79,24 @@ class Nivel {
         
         juego.cargarCosasGlobales()
 	}
+		method direccionDeCalle(calle) {
+        return if (calle.even()) 1 else -1
+    }
+
+    method puedeGenerarEn(calle) {
+        const enemigosEnCalle = enemigos.filter({ e => e.position().y() == calle })
+        
+        if (enemigosEnCalle.size() >= maxPorCalle) {
+            return false
+        }
+
+        const direccion = self.direccionDeCalle(calle)
+        return if (direccion == 1) {
+            !enemigosEnCalle.any({ e => e.position().x() < distanciaMinima })
+        } else {
+            !enemigosEnCalle.any({ e => e.position().x() > game.width() - distanciaMinima })
+        }
+    }
 
 	method empezar() {
         pausa.activa(false) 
@@ -96,24 +118,26 @@ class Nivel {
             }
         })
 
+
         self.cargarVisuales()
 
         game.onTick(ticksGeneracion, "generar_enemigos", {
-            if (!pausa.activa()) { 
-                if (!filasCalle.isEmpty() and 0.randomUpTo(1) < probabilidadEnemigos) {
-                    const calle = filasCalle.anyOne()
-                    
-                    const ladoRandom = 0.randomUpTo(1)
-                    const lado = if (ladoRandom > 0.5) 0 else game.width()
-                    const direccion = if (ladoRandom > 0.5) 1 else -1
+        if (!pausa.activa()) { 
+            const callesLibres = filasCalle.filter({ c => self.puedeGenerarEn(c) })
 
+            if (enemigos.size() < maxEnemigos and !callesLibres.isEmpty() and 
+                0.randomUpTo(1) < probabilidadEnemigos) {
+                
+                const calle = callesLibres.anyOne()
+                const direccion = self.direccionDeCalle(calle)
+                const lado = if (direccion == 1) 0 else game.width()
 
-                    const nuevoEnemigo = generadorEnemigos.anyOne().generarEnemigo(game.at(lado, calle), direccion)
-                    enemigos.add(nuevoEnemigo)
-                    nuevoEnemigo.agregarAlJuego()
-                }
+                const nuevoEnemigo = generadorEnemigos.anyOne().generarEnemigo(game.at(lado, calle), direccion)
+                enemigos.add(nuevoEnemigo)
+                nuevoEnemigo.agregarAlJuego()
             }
-        })
+        }
+    })
 
         game.onTick(100, "sacar_enemigos", {
             const autosAfuera = enemigos.filter({enemigo => enemigo.salioDeGrilla()})
@@ -174,12 +198,12 @@ object niveles {
 
 	var property nivelActual = 0
 
-	const nivel1 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 1, generadorEnemigos = [autoFactory], nivelActual = 1)
-	const nivel2 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 1, generadorEnemigos = [colectivoFactory], nivelActual = 2)
-	const nivel3 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 1500, probabilidadEnemigos = 0.6, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3)
-	const nivel4 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.7, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 4)
-    const nivel5 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 1500, probabilidadEnemigos = 0.8, generadorEnemigos = [trenFactory], nivelActual = 5)
-    const nivel6 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.7, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 6)
+	const nivel1 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 1, generadorEnemigos = [autoFactory], nivelActual = 1, maxEnemigos = 16, maxPorCalle = 6, distanciaMinima = 2)
+	const nivel2 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 400, probabilidadEnemigos = 1, generadorEnemigos = [colectivoFactory], nivelActual = 2, maxEnemigos = 8, maxPorCalle = 4, distanciaMinima = 4)
+	const nivel3 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 2500, probabilidadEnemigos = 0.6, generadorEnemigos = [trenFactory, premetroFactory], nivelActual = 3, maxEnemigos = 5, maxPorCalle = 2, distanciaMinima = 4)
+	const nivel4 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.7, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 4, maxEnemigos = 8, maxPorCalle = 8, distanciaMinima = 3)
+    const nivel5 = new Nivel(imagenCamino = "piso/via.png", ticksGeneracion = 2500, probabilidadEnemigos = 0.8, generadorEnemigos = [trenFactory], nivelActual = 5, maxEnemigos = 5, maxPorCalle = 4, distanciaMinima = 3)
+    const nivel6 = new Nivel(imagenCamino = "piso/calle.png", ticksGeneracion = 1000, probabilidadEnemigos = 0.7, generadorEnemigos = [autoFactory, colectivoFactory], nivelActual = 12, maxEnemigos = 14, maxPorCalle = 5, distanciaMinima = 3)
 
 	var property nivelesCreados = [cinematicaInicio, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, cinematicaFinal]
 
