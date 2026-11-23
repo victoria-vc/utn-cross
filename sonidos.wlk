@@ -1,42 +1,28 @@
-
 import wollok.game.*
 
 object sonidos {
-
-  method moverPersonaje() {
-    const audio = game.sound("sonidos/movimiento.mp3")
-    audio.volume(0.1)
-    audio.play()
-  }
-  method choque() {
-    const audio = game.sound("sonidos/choque.mp3")
-    audio.volume(0.1)
-    audio.play()
-  }
-
-  method pasarNivel() {
-    game.sound("sonidos/pasarNivel.mp3").play()
-  }
-
-  method ganarVida() {
-    game.sound("sonidos/salud.mp3").play()
-  }
-
-  method escudo() {
-    const audio = game.sound("sonidos/escudo.mp3")
-    audio.volume(0.5)
-    audio.play()
-  }
-
-  method velocidad() {
-    game.sound("sonidos/velocidad.mp3").play()
-  }
-
-  method gameOver() {
-    game.sound("sonidos/gameOver.mp3").play()
-  }
-
   var sonidoGanar = null
+
+  method reproducir(nombre, volumen) {
+    const audio = game.sound("sonidos/" + nombre + ".mp3")
+    audio.volume(volumen)
+    audio.play()
+  }
+
+  method reproducirNormal(nombre) {
+    self.reproducir(nombre, 1)
+  }
+
+  method choque() { self.reproducir("choque", 0.1) }
+  method escudo() { self.reproducir("escudo", 0.5) }
+  method pasarNivel() { self.reproducirNormal("pasarNivel") }
+  method ganarVida() { self.reproducirNormal("salud") }
+  method velocidad() { self.reproducirNormal("velocidad") }
+  method gameOver() { self.reproducirNormal("gameOver") }
+  method cambioBoton() { self.reproducirNormal("cambioBoton") }
+  method selecBoton() { self.reproducirNormal("selecBoton") }
+  method itemPickup() { self.reproducirNormal("itemPickup") }
+  method pausa() { self.reproducirNormal("pausa") }
 
   method musicaGanar() {
     sonidoGanar = game.sound("sonidos/musicaGanar.mp3")
@@ -48,21 +34,5 @@ object sonidos {
     if (sonidoGanar != null and sonidoGanar.played()) {
       sonidoGanar.stop()
     }
-  }
-
-  method cambioBoton() {
-    game.sound("sonidos/cambioBoton.mp3").play()
-  }
-
-  method selecBoton() {
-    game.sound("sonidos/selecBoton.mp3").play()
-  }
-
-  method itemPickup() {
-    game.sound("sonidos/itemPickup.mp3").play()
-  }
-
-  method pausa() {
-    game.sound("sonidos/pausa.mp3").play()
   }
 }

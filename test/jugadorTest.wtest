@@ -1,4 +1,5 @@
 import jugador.*
+import movimientos.*
 import powerups.*
 import enemigos.*
 import mapa.*
@@ -12,21 +13,21 @@ describe "Tests de movimiento del jugador" {
     }
 
     test "El jugador se mueve hacia la derecha y actualiza su imagen" {
-        jugador.moverA(game.at(11, 0))
+        jugador.mover(derecha)
 
         assert.equals(game.at(11, 0), jugador.position())
         assert.equals("jugador/jugador_derecha.png", jugador.image())
     }
 
     test "El jugador se mueve hacia la izquierda y actualiza su imagen" {
-        jugador.moverA(game.at(9, 0))
+        jugador.mover(izquierda)
 
         assert.equals(game.at(9, 0), jugador.position())
         assert.equals("jugador/jugador_izquierda.png", jugador.image())
     }
 
     test "El jugador se mueve hacia arriba y actualiza su imagen" {
-        jugador.moverA(game.at(10, 1))
+        jugador.mover(arriba)
 
         assert.equals(game.at(10, 1), jugador.position())
         assert.equals("jugador/jugador_arriba.png", jugador.image())
@@ -34,21 +35,21 @@ describe "Tests de movimiento del jugador" {
 
     test "El jugador se mueve hacia abajo y actualiza su imagen" {
         jugador.position(game.at(10, 5))
-        jugador.moverA(game.at(10, 4))
+        jugador.mover(abajo)
 
         assert.equals(game.at(10, 4), jugador.position())
         assert.equals("jugador/jugador_abajo.png", jugador.image())
     }
 
     test "El jugador no sale de la grilla al intentar bajar desde el borde inferior" {
-        jugador.moverA(game.at(10, -1))
+        jugador.mover(abajo)
 
         assert.equals(game.at(10, 0), jugador.position())
     }
 
     test "Con velocidad activada el jugador avanza dos celdas" {
         jugador.activarVelocidad()
-        jugador.moverA(game.at(11, 0))
+        jugador.mover(derecha)
 
         assert.equals(2, jugador.velocidad())
         assert.equals(game.at(12, 0), jugador.position())
@@ -57,22 +58,22 @@ describe "Tests de movimiento del jugador" {
     test "El jugador no puede caminar sobre la zona UI de vidas ni de puntaje" {
         // Zona vidas: y == 13, x entre 0 y 2
         jugador.position(game.at(3, 13))
-        jugador.moverA(game.at(2, 13))
+        jugador.mover(izquierda)
         assert.equals(game.at(3, 13), jugador.position())
 
         // Zona puntaje: y == 13, x entre 16 y 19
         jugador.position(game.at(15, 13))
-        jugador.moverA(game.at(16, 13))
+        jugador.mover(derecha)
         assert.equals(game.at(15, 13), jugador.position())
     }
 
     test "El jugador gana el nivel al llegar a las celdas de meta (9, 13) o (10, 13)" {
         jugador.position(game.at(9, 12))
-        jugador.moverA(game.at(9, 13))
+        jugador.mover(arriba)
         assert.that(mapa.ganoElNivel(jugador))
 
         jugador.position(game.at(10, 12))
-        jugador.moverA(game.at(10, 13))
+        jugador.mover(arriba)
         assert.that(mapa.ganoElNivel(jugador))
     }
 }
@@ -164,7 +165,7 @@ describe "Tests de vidas y powerups del jugador" {
         jugador.position(game.at(10, 5))
         auto.afectarJugador(jugador)
 
-        jugador.moverA(game.at(10, 6))
+        jugador.mover(arriba)
         assert.equals(game.at(10, 5), jugador.position())
     }
 

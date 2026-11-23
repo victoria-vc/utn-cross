@@ -1,7 +1,7 @@
 import niveles.*
 import sonidos.*
 import juego.*
-import mapa.*
+import movimientos.*
 import powerups.*
 
 object jugador {
@@ -13,133 +13,76 @@ object jugador {
 
     method image() = direccion.image()
 
-    method moverA(nuevaPosition) {
-    if (direccion.puedeActuar()) {
-        if (nuevaPosition.x() > position.x())
-            direccion = derecha
-        if (nuevaPosition.x() < position.x())
-            direccion = izquierda
-        if (nuevaPosition.y() > position.y())
-            direccion = arriba
-        if (nuevaPosition.y() < position.y())
-            direccion = abajo
-
-        direccion.mover()
+    method mover(nuevaDireccion) {
+        if (direccion.puedeActuar()) {
+            direccion = nuevaDireccion
+            direccion.mover(self)
+        }
     }
-}
 
-    method reiniciarPosicion(){
+    method reiniciarPosicion() {
         position = game.at(10, 0)
     }
 
     method reiniciar() {
-    vidas = 3
-    escudoJugador = sinEscudo
-    velocidad = 1
-    direccion = derecha
-    self.reiniciarPosicion()
-}
+        vidas = 3
+        escudoJugador = sinEscudo
+        velocidad = 1
+        direccion = derecha
+        self.reiniciarPosicion()
+    }
 
-    method activarEscudo(tiempo){
+    method activarEscudo(tiempo) {
         escudoJugador = escudo
         game.schedule(tiempo, { self.sacarEscudo() })
     }
 
-    method sacarEscudo(){
+    method sacarEscudo() {
         escudoJugador = sinEscudo
     }
 
-    method sacarVida(){
+    method sacarVida() {
         vidas -= 1
     }
 
     method perdio() = vidas < 1 
 
     method perderVida() {
-    if (direccion.puedeActuar()) {
-        escudoJugador.perderVida(self)
-        if (self.perdio()) {
-            juego.perder()
+        if (direccion.puedeActuar()) {
+            escudoJugador.perderVida(self)
+            if (self.perdio()) {
+                juego.perder()
+            }
         }
     }
-}
 
-    method sumarVida(){
+    method sumarVida() {
         vidas += 1
         sonidos.ganarVida()
     }
 
     method activarVelocidad() {
-    velocidad = 2
-    game.schedule(5000, {
-        velocidad = 1
-    })
+        velocidad = 2
+        game.schedule(5000, {
+            velocidad = 1
+        })
     }
 
-    method agarrarItem(){
+    method agarrarItem() {
         sonidos.itemPickup()
     }
 
     method mostrarChoque() {
-    direccion = destrozado
-    game.schedule(500, { 
-        direccion = derecha
-        self.reiniciarPosicion()
-    })
-}
-
-}
-
-object derecha {
-    method image() = "jugador/jugador_derecha.png"
-    method puedeActuar() = true
-    method mover() {
-        jugador.velocidad().times({ i => 
-            if(mapa.puedeCaminar(jugador.position().right(1))){
-                jugador.position(jugador.position().right(1))
-            }
-        })
-    }
-}
-
-object izquierda {
-    method image() = "jugador/jugador_izquierda.png"
-    method puedeActuar() = true
-    method mover() {
-        jugador.velocidad().times({ i =>
-            if(mapa.puedeCaminar(jugador.position().left(1))){
-                jugador.position(jugador.position().left(1))
-            }
-        })
-    }
-}
-
-object arriba {
-    method image() = "jugador/jugador_arriba.png"
-    method puedeActuar() = true
-    method mover() {
-        jugador.velocidad().times({ i =>
-            if(mapa.puedeCaminar(jugador.position().up(1))){
-                jugador.position(jugador.position().up(1))
-            }
-        })
-    }
-}
-
-object abajo {
-    method image() = "jugador/jugador_abajo.png"
-    method puedeActuar() = true
-    method mover() {
-        jugador.velocidad().times({ i =>
-            if(mapa.puedeCaminar(jugador.position().down(1))){
-                jugador.position(jugador.position().down(1))
-            }
+        direccion = destrozado
+        game.schedule(500, { 
+            direccion = derecha
+            self.reiniciarPosicion()
         })
     }
 }
 
 object destrozado {
     method image() = "jugador/jugador_destrozado.png" 
-    method mover() {} 
+    method mover(personaje) {} 
     method puedeActuar() = false
 }
