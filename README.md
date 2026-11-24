@@ -93,7 +93,7 @@ El juego fue desarrollado para la materia **Paradigmas de Programación** de la 
 
 <kbd>Música</kbd>: [Soundtrack de Transformice](https://www.youtube.com/playlist?list=PLH6sThc3gLxD6hU2ddPiKSnu0h_TuF67P)
 
-<kbd>Jugar desde el navegador</kbd>**: 
+<kbd>Jugar desde el navegador</kbd>: 
 
 [UTN Cross](https://victoria-vc.github.io/utn-cross/)
 
