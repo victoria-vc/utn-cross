@@ -18,12 +18,18 @@ Hay 5 niveles; en cada uno de ellos el objetivo es llegar al otro lado de la pan
 
 ![Controles][controles]
 
-:arrow_up: (Arriba)
-:arrow_down: (Abajo)
-:arrow_left: (Izquierda)
-:arrow_right: (Derecha)
+<kbd>↑</kbd> (Mover al jugador arriba) 
+
+<kbd>↓</kbd> (Mover al jugador abajo)
+
+<kbd>←</kbd> (Mover al jugador izquierda)
+
+<kbd>→</kbd>(Mover al jugador derecha)
+
 <kbd>m</kbd> (Pausar música)
+
 <kbd>Ctrl</kbd> (Pausa del juego)
+
 <kbd>⏎</kbd> (Seleccionar opción)
 
 ![Enemigos][img-enemigos]
@@ -68,19 +74,41 @@ Los puntos se consiguen recolectando los powerups y los distintos objetos que es
 
 El juego fue desarrollado para la materia **Paradigmas de Programación** de la carrera Ingeniería en Sistemas de Información (UTN FRBA), con el objetivo de aplicar los conceptos del paradigma orientado a objetos.
 
-**Integrantes del grupo**: César Lencina, Luca Wieczorek, Matias Lynch, Pablo Nicolas Palacio, Victoria Castagno
+<kbd>Integrantes del grupo</kbd>: César Lencina, Luca Wieczorek, Matias Lynch, Pablo Nicolas Palacio, Victoria Castagno
 
-**Profesor**: Pedro Jara
+<kbd>Profesor</kbd>: Pedro Jara
 
-**Curso**: K2051
+<kbd>Curso</kbd>: K2051
 
-**Año**: 2026 
+<kbd>Año</kbd>: 2026 
 
 ![Calle][calle]
 
 ![Informacion][informacion]
 
 ![Tecnica][tecnica]
+
+<kbd>Tecnologías utilizadas</kbd>
+
+**Lenguaje**: Wollok (*Wollok-TS*)
+
+**Motor**: Wollok Game
+
+**Arte**: Sprites y pixel-art propios
+
+**Música**: [Soundtrack de Transformice](https://www.youtube.com/playlist?list=PLH6sThc3gLxD6hU2ddPiKSnu0h_TuF67P)
+
+**Jugar desde el navegador**: 
+
+[UTN Cross](https://victoria-vc.github.io/utn-cross/)
+
+**Clonar el repositorio**: 
+
+git clone [https://github.com/tictoria-vc/utncross.git](https://github.com/tu-victoria-vc/utncross.git)
+
+cd utn-cross
+
+wollok run UTNcross.jueguito
 
 ![Calle][calle]
 
