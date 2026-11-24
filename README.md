@@ -14,7 +14,7 @@ UTN Cross es un juego inspirado en el estilo de Crossy Road. Está realizado con
 
 ![Juego][img-juego]
 
-Hay 5 niveles; en cada uno de ellos el objetivo es llegar al otro lado de la pantalla, cruzando las calles y evitando a los enemigos (autos, colectivos, etc.). Cada vez que el jugador colisione con un enemigo, perderá una vida. Para ganar el juego, es necesario superar los niveles consecutivamente. El último nivel es el más difícil y representa el desafío final: llegar a la UTN.
+Hay 6 niveles; en cada uno de ellos el objetivo es llegar al otro lado de la pantalla, cruzando las calles y evitando a los enemigos (autos, colectivos, etc.). Cada vez que el jugador colisione con un enemigo, perderá una vida. Para ganar el juego, es necesario superar los niveles consecutivamente. El último nivel es el más difícil y representa el desafío final: llegar a la UTN.
 
 ![Controles][img-controles]
 
