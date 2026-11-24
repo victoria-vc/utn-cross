@@ -143,6 +143,12 @@ class Nivel {
             }
         })
 
+        game.onTick(50, "verificar_meta", {
+            if (!pausa.activa() and mapa.ganoElNivel(jugador)) {
+                niveles.pasarNivel()
+            }
+        })
+
         game.onCollideDo(jugador, { elemento =>
             elemento.afectarJugador(jugador)
         })

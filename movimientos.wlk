@@ -1,5 +1,4 @@
 import wollok.game.*
-import niveles.*
 import jugador.*
 import pausa.*
 import mapa.*
@@ -51,14 +50,11 @@ class Direccion {
     method puedeActuar() = true
     method siguientePosicion(pos)
 
-    method mover(personaje) {
+   method mover(personaje) {
         personaje.velocidad().times({ i =>
             const siguiente = self.siguientePosicion(personaje.position())
             if (mapa.puedeCaminar(siguiente)) {
                 personaje.position(siguiente)
-                if (mapa.ganoElNivel(personaje)) {
-                    niveles.pasarNivel()
-                }
             }
         })
     }
