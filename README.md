@@ -16,6 +16,15 @@ UTN Cross es un juego inspirado en el estilo de Crossy Road. Está realizado con
 
 Hay 5 niveles; en cada uno de ellos el objetivo es llegar al otro lado de la pantalla, cruzando las calles y evitando a los enemigos (autos, colectivos, etc.). Cada vez que el jugador colisione con un enemigo, perderá una vida. Para ganar el juego, es necesario superar los niveles consecutivamente. El último nivel es el más difícil y representa el desafío final: llegar a la UTN.
 
+![Controles][controles]
+
+:arrow_up: (Arriba)
+:arrow_down: (Abajo)
+:arrow_left: (Izquierda)
+:arrow_right: (Derecha)
+<kbd>m</kbd> (Pausar música)
+<kbd>Ctrl</kbd> (Pausa del juego)
+<kbd>⏎</kbd> (Seleccionar opción)
 
 ![Enemigos][img-enemigos]
 
@@ -69,8 +78,15 @@ El juego fue desarrollado para la materia **Paradigmas de Programación** de la 
 
 ![Calle][calle]
 
+![Informacion][informacion]
+
+![Tecnica][tecnica]
+
+![Calle][calle]
+
 [img-intro]: assets/readme/introduccion.png
 [img-juego]: assets/readme/juego.png
+[img-controles]: assets/readme/controles.png
 [img-enemigos]: assets/readme/enemigos.png
 [img-powerups]: assets/readme/powerups.png
 [img-puntos]: assets/readme/puntos.png
@@ -86,3 +102,5 @@ El juego fue desarrollado para la materia **Paradigmas de Programación** de la 
 [captura2]: assets/readme/captura2.jpg
 [infodel]: assets/readme/info-del.png
 [tp]: assets/readme/tp.png
+[informacion]: assets/readme/informacion.png
+[tecnica]: assets/readme/tecnica.png
