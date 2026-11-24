@@ -69,6 +69,7 @@ class Nivel {
         filasPasto.clear()
         filasCalle.clear()
         enemigos.clear()
+        jugador.reiniciarPosicion()
 
         self.generarTerreno()
         self.cargarVisuales()
