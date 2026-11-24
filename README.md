@@ -84,27 +84,31 @@ El juego fue desarrollado para la materia **Paradigmas de Programación** de la 
 
 ![Tecnica][tecnica]
 
-<kbd>Tecnologías utilizadas</kbd>
 
-**Lenguaje**: Wollok (*Wollok-TS*)
+<kbd>Lenguaje</kbd>: Wollok (*Wollok-TS*)
 
-**Motor**: Wollok Game
+<kbd>Motor</kbd>: Wollok Game
 
-**Arte**: Sprites y pixel-art propios
+<kbd>Arte</kbd>: Sprites y pixel-art propios
 
-**Música**: [Soundtrack de Transformice](https://www.youtube.com/playlist?list=PLH6sThc3gLxD6hU2ddPiKSnu0h_TuF67P)
+<kbd>Música</kbd>: [Soundtrack de Transformice](https://www.youtube.com/playlist?list=PLH6sThc3gLxD6hU2ddPiKSnu0h_TuF67P)
 
-**Jugar desde el navegador**: 
+<kbd>Jugar desde el navegador</kbd>**: 
 
 [UTN Cross](https://victoria-vc.github.io/utn-cross/)
 
-**Clonar el repositorio**: 
+<kbd>Jugar local</kbd>: 
 
-git clone [https://github.com/tictoria-vc/utncross.git](https://github.com/tu-victoria-vc/utncross.git)
+*git clone [https://github.com/tictoria-vc/utncross.git](https://github.com/tu-victoria-vc/utncross.git)*
 
-cd utn-cross
+*cd utn-cross*
 
-wollok run UTNcross.jueguito
+*wollok run UTNcross.jueguito*
+
+
+<kbd>Correr tests</kbd>:
+
+*wollok test*
 
 ![Calle][calle]
 
