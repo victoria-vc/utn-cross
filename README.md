@@ -16,21 +16,17 @@ UTN Cross es un juego inspirado en el estilo de Crossy Road. Está realizado con
 
 Hay 5 niveles; en cada uno de ellos el objetivo es llegar al otro lado de la pantalla, cruzando las calles y evitando a los enemigos (autos, colectivos, etc.). Cada vez que el jugador colisione con un enemigo, perderá una vida. Para ganar el juego, es necesario superar los niveles consecutivamente. El último nivel es el más difícil y representa el desafío final: llegar a la UTN.
 
-![Controles][controles]
+![Controles][img-controles]
 
-<kbd>↑</kbd> (Mover al jugador arriba) 
-
-<kbd>↓</kbd> (Mover al jugador abajo)
-
-<kbd>←</kbd> (Mover al jugador izquierda)
-
-<kbd>→</kbd>(Mover al jugador derecha)
-
-<kbd>m</kbd> (Pausar música)
-
-<kbd>Ctrl</kbd> (Pausa del juego)
-
-<kbd>⏎</kbd> (Seleccionar opción)
+| Tecla | Acción |
+| :---: | :--- |
+| <img src="https://img.shields.io/badge/-%E2%86%91-21262d?style=for-the-badge" height="28" alt="Arriba"> | Mover al jugador arriba |
+| <img src="https://img.shields.io/badge/-%E2%86%93-21262d?style=for-the-badge" height="28" alt="Abajo"> | Mover al jugador abajo |
+| <img src="https://img.shields.io/badge/-%E2%86%90-21262d?style=for-the-badge" height="28" alt="Izquierda"> | Mover al jugador izquierda |
+| <img src="https://img.shields.io/badge/-%E2%86%92-21262d?style=for-the-badge" height="28" alt="Derecha"> | Mover al jugador derecha |
+| <img src="https://img.shields.io/badge/-M-21262d?style=for-the-badge" height="28" alt="M"> | Pausar música |
+| <img src="https://img.shields.io/badge/-Ctrl-21262d?style=for-the-badge" height="28" alt="Ctrl"> | Pausa del juego |
+| <img src="https://img.shields.io/badge/-Enter%20%E2%86%B5-21262d?style=for-the-badge" height="28" alt="Enter"> | Seleccionar opción |
 
 ![Enemigos][img-enemigos]
 
