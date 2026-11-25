@@ -85,7 +85,9 @@ El juego fue desarrollado para la materia **Paradigmas de Programación** de la 
 ![Tecnica][tecnica]
 
 
-<kbd>Lenguaje</kbd>: Wollok (*Wollok-TS*)
+<kbd>Lenguaje</kbd>: Wollok (*Wollok-Lang* `v4.0.0`)
+
+<kbd>Entorno</kbd>: Wollok-TS `v4.3.0` / Wollok-TS-CLI `v1.1.1`
 
 <kbd>Motor</kbd>: Wollok Game
 
