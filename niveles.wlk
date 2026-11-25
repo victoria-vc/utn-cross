@@ -228,6 +228,7 @@ object niveles {
 
     method pasarNivel() {
         nivelActual += 1
+        sonidos.pasarNivel()
         game.clear()
         if (nivelActual < nivelesCreados.size()) {
             nivelesCreados.get(nivelActual).empezar()
